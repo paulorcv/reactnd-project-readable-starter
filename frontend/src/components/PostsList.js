@@ -16,16 +16,12 @@ import Category from '@material-ui/icons/Category';
 
 export class PostsList extends Component {
   render() {
-
     const posts = this.props.posts;
-
-    console.log(posts);
-
     return (
       <div>
         <Grid container spacing={24} style={{padding: 20}}>
             {Object.keys(posts).map(id =>(
-                <Grid key={id} item xs={12} sm={6} lg={4} xl={3}>                    
+                <Grid key={id} item xs={12} sm={6} lg={3} xl={3}>                    
                 <Card>
                     <CardHeader 
                         title={posts[id].title}
