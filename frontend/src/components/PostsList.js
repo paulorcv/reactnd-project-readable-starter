@@ -25,7 +25,7 @@ export class PostsList extends Component {
       <div>
         <Grid container spacing={24} style={{padding: 20}}>
             {Object.keys(posts).map(id =>(
-                <Grid key={id} item xs={12} sm={4} lg={4} xl={3}>                    
+                <Grid key={id} item xs={12} sm={6} lg={4} xl={3}>                    
                 <Card>
                     <CardHeader 
                         title={posts[id].title}
