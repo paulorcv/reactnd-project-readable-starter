@@ -31,7 +31,6 @@ class NavBar extends Component {
   };
 
   render(){
-    console.log(this.props);
     const { open } = this.state;
     const { categories } = this.props;
 
@@ -70,13 +69,6 @@ class NavBar extends Component {
             </List>
             <Divider />
             <List>
-              {/* {categories.map((category) => (
-                <ListItem button key={category.name}>
-                  <ListItemIcon><CategoryIcon /></ListItemIcon>
-                  <ListItemText primary={category.name} />
-                </ListItem>
-              ))} */}
-
               {Object.keys(categories).map(id =>(
                 <ListItem button key={categories[id].name}>
                 <ListItemIcon><CategoryIcon /></ListItemIcon>
@@ -93,10 +85,6 @@ class NavBar extends Component {
 }
 
 function mapStateToProps( {categories }){
-  
-  console.log('categories:');
-  console.log(categories);
-  
   return { categories }
 }
 
