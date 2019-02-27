@@ -15,6 +15,7 @@ import CategoryIcon from '@material-ui/icons/Category';
 import ClearAllIcon from '@material-ui/icons/ClearAll';
 import { connect } from 'react-redux'
 import { setCategoriesFilter }  from '../actions/categories';
+import { handleInitialData } from '../actions/shared';
 
 
 
@@ -29,6 +30,10 @@ class NavBar extends Component {
     this.props.dispatch(setCategoriesFilter(filterName));
     console.log(filterName);
    }  
+
+   handleAll(){
+     this.props.dispatch(handleInitialData());
+   }
 
   handleDrawerOpen = () => {
     this.setState({ open: true });
@@ -70,17 +75,17 @@ class NavBar extends Component {
             </div>
             <Divider />
             <List>              
-              <ListItem button key='clear'>
+              <ListItem button key='clear' onClick={()=>this.handleAll()}>
                 <ListItemIcon><ClearAllIcon /></ListItemIcon>
-                <ListItemText primary="All" />
+                <ListItemText primary="All"/>
               </ListItem>
             </List>
             <Divider />
             <List>
               {Object.keys(categories).map(id =>(
-                <ListItem button key={categories[id].name} >
+                <ListItem button key={categories[id].name} onClick={()=>this.handleFilter(categories[id].name)}>
                 <ListItemIcon><CategoryIcon /></ListItemIcon>
-                <ListItemText primary={categories[id].name} onClick={()=>this.handleFilter(categories[id].name)} />
+                <ListItemText primary={categories[id].name} />
               </ListItem>                  
               ))}  
 
