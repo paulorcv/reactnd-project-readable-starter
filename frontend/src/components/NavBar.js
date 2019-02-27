@@ -13,6 +13,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import CategoryIcon from '@material-ui/icons/Category';
 import ClearAllIcon from '@material-ui/icons/ClearAll';
+import { connect } from 'react-redux'
+
 
 
 class NavBar extends Component {
@@ -29,9 +31,9 @@ class NavBar extends Component {
   };
 
   render(){
-
+    console.log(this.props);
     const { open } = this.state;
-    const categories = this.props.categories;
+    const { categories } = this.props;
 
     return (
       <div>
@@ -68,12 +70,20 @@ class NavBar extends Component {
             </List>
             <Divider />
             <List>
-              {categories.map((category) => (
+              {/* {categories.map((category) => (
                 <ListItem button key={category.name}>
                   <ListItemIcon><CategoryIcon /></ListItemIcon>
                   <ListItemText primary={category.name} />
                 </ListItem>
-              ))}
+              ))} */}
+
+              {Object.keys(categories).map(id =>(
+                <ListItem button key={categories[id].name}>
+                <ListItemIcon><CategoryIcon /></ListItemIcon>
+                <ListItemText primary={categories[id].name} />
+              </ListItem>                  
+              ))}  
+
             </List>
           </Drawer>
       </div>
@@ -82,4 +92,12 @@ class NavBar extends Component {
 
 }
 
-export default NavBar;
+function mapStateToProps( {categories }){
+  
+  console.log('categories:');
+  console.log(categories);
+  
+  return { categories }
+}
+
+export default connect(mapStateToProps)(NavBar);
