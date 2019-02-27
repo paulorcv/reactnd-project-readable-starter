@@ -14,23 +14,38 @@ import Message from '@material-ui/icons/Message';
 import Chip from '@material-ui/core/Chip';
 import Category from '@material-ui/icons/Category';
 import { connect } from 'react-redux'
+import { Link, withRouter } from 'react-router-dom';
+import ButtonBase from '@material-ui/core/ButtonBase';
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
 
+const styles = theme => ({
+    button: {
+      margin: theme.spacing.unit,      
+      margin: 20
+    }
+  });
+  
 
 export class PostsList extends Component {
-  render() {
-    const { posts }  = this.props;
+  
+    render() {
+    const { posts, classes }  = this.props;
     return (
       <div>
         <Grid container spacing={24} style={{padding: 20}}>
             {Object.keys(posts).map(id =>(
                 <Grid key={id} item xs={12} sm={6} lg={3} xl={3}>                    
-                <Card>
-                    <CardHeader 
-                        title={posts[id].title}
-                        subheader={posts[id].author} >                                          
-                        </CardHeader>
+                
+                <Card style={{padding: 10}}>
+                    <ButtonBase component={Link} to={`/posts/${posts[id].id}`} >                       
+                        <CardHeader 
+                            title={posts[id].title}
+                            subheader={posts[id].author}
+                            style={{padding: 10}} />                       
+                    </ButtonBase>                        
                     <CardContent>
-                        <Typography component="p">
+                        <Typography component="p" style={{padding: 10}}>
                             {posts[id].body}
                         </Typography>
                         <Chip label={posts[id].category} icon={<Category />} />
@@ -47,9 +62,15 @@ export class PostsList extends Component {
                         </IconButton>
                         <Badge badgeContent={posts[id].commentCount} color="primary">
                             <Message />
-                        </Badge>                         
-                    </CardActions>
-                </Card>                
+                        </Badge>      
+                        <Button variant='contained' 
+                                color='primary' 
+                                className={classes.button}
+                                component={Link} to={`/posts/${posts[id].id}`} >                    
+                            View
+                        </Button>
+                    </CardActions>                    
+                </Card> 
             </Grid>
             ))}
         </Grid>      
@@ -63,6 +84,4 @@ function mapStateToProps({posts}){
     return {posts}
   }
   
-  export default connect(mapStateToProps)(PostsList)
-  
-
+  export default withRouter(connect(mapStateToProps)(withStyles(styles)(PostsList)))

@@ -6,7 +6,9 @@ import PostsList from './PostsList'
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { handleInitialData } from '../actions/shared'
 import { connect } from 'react-redux';
-import { Route } from 'react-router-dom'
+import { Route } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import PostPage from '../components/PostPage';
 
 class App extends Component {
   
@@ -17,11 +19,14 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider theme={theme} >
+      <Router basename={process.env.PUBLIC_URL}>
         <React.Fragment>
         <CssBaseline />
           <NavBar/>
           <Route path='/' exact component={PostsList} />
-        </React.Fragment>      
+          <Route path='/posts/:id' component={PostPage} />
+        </React.Fragment>
+        </Router>      
       </MuiThemeProvider>
     );
   }
