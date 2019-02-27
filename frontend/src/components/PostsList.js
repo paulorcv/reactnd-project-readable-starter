@@ -13,10 +13,12 @@ import Badge from '@material-ui/core/Badge';
 import Message from '@material-ui/icons/Message';
 import Chip from '@material-ui/core/Chip';
 import Category from '@material-ui/icons/Category';
+import { connect } from 'react-redux'
+
 
 export class PostsList extends Component {
   render() {
-    const posts = this.props.posts;
+    const { posts }  = this.props;
     return (
       <div>
         <Grid container spacing={24} style={{padding: 20}}>
@@ -57,4 +59,10 @@ export class PostsList extends Component {
   }
 }
 
-export default PostsList
+function mapStateToProps({posts}){
+    return {posts}
+  }
+  
+  export default connect(mapStateToProps)(PostsList)
+  
+
