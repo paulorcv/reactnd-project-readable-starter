@@ -6,6 +6,7 @@ import DashBoard from './Dashboard'
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { handleInitialData } from '../actions/shared'
 import { connect } from 'react-redux';
+import { Route } from 'react-router-dom'
 
 class App extends Component {
   
@@ -15,12 +16,12 @@ class App extends Component {
 
   render() {
     return (
-      <MuiThemeProvider theme={theme}>
+      <MuiThemeProvider theme={theme} >
         <React.Fragment>
         <CssBaseline />
           <NavBar/>
-          <DashBoard />
-        </React.Fragment>
+          <Route path='/' exact component={DashBoard} />
+        </React.Fragment>      
       </MuiThemeProvider>
     );
   }
