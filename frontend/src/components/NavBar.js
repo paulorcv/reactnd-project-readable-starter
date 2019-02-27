@@ -14,13 +14,21 @@ import ListItemText from '@material-ui/core/ListItemText';
 import CategoryIcon from '@material-ui/icons/Category';
 import ClearAllIcon from '@material-ui/icons/ClearAll';
 import { connect } from 'react-redux'
+import { setCategoriesFilter }  from '../actions/categories';
 
 
 
 class NavBar extends Component {
+  
   state = {
     open: false,
   };
+
+  
+   handleFilter(filterName){     
+    this.props.dispatch(setCategoriesFilter(filterName));
+    console.log(filterName);
+   }  
 
   handleDrawerOpen = () => {
     this.setState({ open: true });
@@ -33,7 +41,7 @@ class NavBar extends Component {
   render(){
     const { open } = this.state;
     const { categories } = this.props;
-
+    
     return (
       <div>
         <AppBar position='static'>
@@ -70,9 +78,9 @@ class NavBar extends Component {
             <Divider />
             <List>
               {Object.keys(categories).map(id =>(
-                <ListItem button key={categories[id].name}>
+                <ListItem button key={categories[id].name} >
                 <ListItemIcon><CategoryIcon /></ListItemIcon>
-                <ListItemText primary={categories[id].name} />
+                <ListItemText primary={categories[id].name} onClick={()=>this.handleFilter(categories[id].name)} />
               </ListItem>                  
               ))}  
 
@@ -84,7 +92,8 @@ class NavBar extends Component {
 
 }
 
-function mapStateToProps( {categories }){
+function mapStateToProps( {categories} ){
+
   return { categories }
 }
 
