@@ -15,6 +15,7 @@ import CategoryIcon from '@material-ui/icons/Category';
 import ClearAllIcon from '@material-ui/icons/ClearAll';
 import { connect } from 'react-redux'
 import { setCategoriesFilter }  from '../actions/categories';
+import { setPostsFromCategoryFilter } from '../actions/posts'
 import { handleInitialData } from '../actions/shared';
 
 
@@ -28,6 +29,7 @@ class NavBar extends Component {
   
    handleFilter(filterName){     
     this.props.dispatch(setCategoriesFilter(filterName));
+    this.props.dispatch(setPostsFromCategoryFilter(filterName));
     console.log(filterName);
    }  
 
