@@ -9,6 +9,8 @@ import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import PostPage from '../components/PostPage';
+import LoadingBar from 'react-redux-loading'
+
 
 class App extends Component {
   
@@ -20,11 +22,18 @@ class App extends Component {
     return (
       <MuiThemeProvider theme={theme} >
       <Router basename={process.env.PUBLIC_URL}>
-        <React.Fragment>
+        <React.Fragment>                
         <CssBaseline />
-          <NavBar/>
-          <Route path='/' exact component={PostsList} />
-          <Route path='/posts/:id' component={PostPage} />
+        <NavBar/>    
+        <LoadingBar />
+          {this.props.loading === true
+              ? null
+              : <div>          
+            
+            <Route path='/' exact component={PostsList} />
+            <Route path='/posts/:id' component={PostPage} />
+          </div>}
+
         </React.Fragment>
         </Router>      
       </MuiThemeProvider>
@@ -32,4 +41,10 @@ class App extends Component {
   }
 }
 
-export default connect()(App);
+function mapStateToProps ({ authedUser }) {
+  return {
+    loading: authedUser === null
+  }
+}
+
+export default connect(mapStateToProps)(App)
