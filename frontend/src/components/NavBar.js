@@ -7,6 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Drawer from '@material-ui/core/Drawer';
 import MenuIcon from '@material-ui/icons/Menu';
 import List from '@material-ui/core/List';
+import HomeIcon from '@material-ui/icons/Home';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -17,8 +18,22 @@ import { connect } from 'react-redux'
 import { setCategoriesFilter }  from '../actions/categories';
 import { setPostsFromCategoryFilter } from '../actions/posts'
 import { handleInitialData } from '../actions/shared';
+import { withStyles } from '@material-ui/core/styles';
+import { withRouter } from 'react-router-dom'
 
 
+const styles = {
+  root: {
+    flexGrow: 1,
+  },
+  grow: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginLeft: 20,
+    marginRight: 20,
+  },
+};
 
 class NavBar extends Component {
   
@@ -26,6 +41,9 @@ class NavBar extends Component {
     open: false,
   };
 
+   handleHome(){
+    this.props.history.push('/');
+   }
   
    handleFilter(filterName){     
     this.props.dispatch(setCategoriesFilter(filterName));
@@ -48,19 +66,22 @@ class NavBar extends Component {
   render(){
     const { open } = this.state;
     const { categories } = this.props;
-    
+    const { classes } = this.props;    
+
     return (
-      <div>
+
+      <div className={classes.root}>
         <AppBar position='static'>
-        <Toolbar disableGutters={!open}>
+        <Toolbar disableGutters={!open}>                        
             <IconButton
               color="inherit"
               aria-label="Open drawer"
               onClick={this.handleDrawerOpen}
+              className={classes.menuButton}              
             >
-              <MenuIcon />
-            </IconButton>
-              <Typography variant='h4' color='inherit'>
+            <MenuIcon />
+            </IconButton>                 
+              <Typography variant='h4' color='inherit' className={classes.grow} >
                   Readable Project
               </Typography>
           </Toolbar>
@@ -76,6 +97,12 @@ class NavBar extends Component {
               </IconButton>
             </div>
             <Divider />
+            <List>              
+              <ListItem button key='clear' onClick={()=>this.handleHome()}>
+                <ListItemIcon><HomeIcon /></ListItemIcon>
+                <ListItemText primary="Home"/>
+              </ListItem>
+            </List>
             <List>              
               <ListItem button key='clear' onClick={()=>this.handleAll()}>
                 <ListItemIcon><ClearAllIcon /></ListItemIcon>
@@ -104,4 +131,4 @@ function mapStateToProps( {categories} ){
   return { categories }
 }
 
-export default connect(mapStateToProps)(NavBar);
+export default withRouter(connect(mapStateToProps)(withStyles(styles)(NavBar)));

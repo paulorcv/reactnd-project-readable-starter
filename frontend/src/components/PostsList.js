@@ -15,15 +15,27 @@ import Chip from '@material-ui/core/Chip';
 import Category from '@material-ui/icons/Category';
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom';
-import ButtonBase from '@material-ui/core/ButtonBase';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
-    button: {
-      margin: theme.spacing.unit,      
+    button: {      
       margin: 20
+    },
+    card: {
+        padding: 10
+    },
+    gridContainer:{
+        padding: 20
+    },
+    cardHeader: {
+        padding: 10,
+        margin: 5
+    },
+    typography: {
+        padding: 5
     }
+
   });
   
 
@@ -33,25 +45,25 @@ export class PostsList extends Component {
     const { posts, classes }  = this.props;
     return (
       <div>
-        <Grid container spacing={24} style={{padding: 20}}>
+        <Grid container spacing={24} className={classes.gridContainer}>
             {Object.keys(posts).map(id =>(
                 <Grid key={id} item xs={12} sm={6} lg={3} xl={3}>                    
                 
-                <Card style={{padding: 10}}>
-                    <ButtonBase component={Link} to={`/posts/${posts[id].id}`} >                       
-                        <CardHeader 
-                            title={posts[id].title}
-                            subheader={posts[id].author}
-                            style={{padding: 10}} />                       
-                    </ButtonBase>                        
+                <Card classsName={classes.card} >
+                <CardHeader 
+                    title={posts[id].title}
+                    subheader={posts[id].author}
+                    className={classes.cardHeader} />                       
                     <CardContent>
-                        <Typography component="p" style={{padding: 10}}>
+                        <Typography component="p" className={classes.typography}>
                             {posts[id].body}
                         </Typography>
-                        <Chip label={posts[id].category} icon={<Category />} />
+                        <Chip label={posts[id].category} 
+                              icon={<Category />} 
+                              color='secondary' />
                     </CardContent>    
                     <CardActions>
-                        <Avatar aria-label='SCORE'>
+                        <Avatar aria-label='SCORE' className={classes.avatar}>
                             {posts[id].voteScore}
                         </Avatar>    
                         <IconButton aria-label='Vote UP'>
