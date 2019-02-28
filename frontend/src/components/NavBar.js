@@ -43,16 +43,18 @@ class NavBar extends Component {
 
    handleHome(){
     this.props.history.push('/');
+    this.handleDrawerClose();
    }
   
    handleFilter(filterName){     
     this.props.dispatch(setCategoriesFilter(filterName));
     this.props.dispatch(setPostsFromCategoryFilter(filterName));
-    console.log(filterName);
+    this.handleDrawerClose();
    }  
 
    handleAll(){
      this.props.dispatch(handleInitialData());
+     this.handleDrawerClose();
    }
 
   handleDrawerOpen = () => {
