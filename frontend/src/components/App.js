@@ -30,8 +30,8 @@ class App extends Component {
               ? null
               : <div>          
             
-            <Route path='/' exact component={PostsList} />
-            <Route path='/posts/:id' component={PostPage} />
+            <Route path='/:category' exact component={PostsList} />
+            <Route path='/:category/:id' component={PostPage} />
           </div>}
 
         </React.Fragment>
@@ -41,9 +41,9 @@ class App extends Component {
   }
 }
 
-function mapStateToProps ({ authedUser }) {
+function mapStateToProps ({ loading }) {
   return {
-    loading: authedUser === null
+    loading
   }
 }
 

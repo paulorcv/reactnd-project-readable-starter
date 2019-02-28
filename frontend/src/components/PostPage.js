@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-
+import { connect } from 'react-redux';
 
 
 const styles = theme => ({
@@ -15,11 +15,12 @@ const styles = theme => ({
 
 
 class PostPage extends Component {
+
   render() {
+    const { id } = this.props.match.params;      
+    const { classes, post }  = this.props;
 
-    const { classes }  = this.props;
-
-    return (
+return (
 <div>
       <Button variant="contained" className={classes.button}>
         Default
@@ -53,5 +54,20 @@ class PostPage extends Component {
   }
 }
 
-export default withStyles(styles)(PostPage)
+function mapStateToProps( {posts, loading}, props){
+ 
+  const { id } = props.match.params;  
+  let post = {};
+  Object.keys(posts).map(index=>{
+    if( posts[index].id === id){
+      return post = posts[index];
+    }
+  });
+
+  return { 
+    post
+  }
+}
+
+export default connect(mapStateToProps)(withStyles(styles)(PostPage))
 

@@ -1,7 +1,14 @@
-import { RECEIVE_POSTS, SET_POSTS_FROM_CATEGORIES_FILTER } from '../actions/posts';
+import { RECEIVE_POSTS, SET_POSTS_FROM_CATEGORIES_FILTER, RECEIVE_POST } from '../actions/posts';
 
 export default function posts( state={}, action){
     switch(action.type){
+        
+        case RECEIVE_POST:
+         return{
+             ...state,
+             ...action.post
+         }
+        
         case RECEIVE_POSTS:
             return{
                 ...state,
