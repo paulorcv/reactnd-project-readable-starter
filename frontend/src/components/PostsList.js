@@ -19,8 +19,7 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 // import { setCategoriesFilter }  from '../actions/categories';
 // import { setPostsFromCategoryFilter } from '../actions/posts'
-
-
+import { handleReceivePosts } from '../actions/posts'
 
 
 const styles = theme => ({
@@ -47,13 +46,10 @@ const styles = theme => ({
 export class PostsList extends Component {
   
     componentDidMount(){
-        // const { category } = this.props;
-        // if( category.trim() !== 'all'){
-        //     this.props.dispatch(setCategoriesFilter(category));
-        //     this.props.dispatch(setPostsFromCategoryFilter(category));
-        // }
-        // console.log('category:');
-        // console.log(category);
+        const { category } = this.props;
+        this.props.dispatch(handleReceivePosts(category)); 
+        console.log('category:');
+        console.log(category);
     }
 
     render() {

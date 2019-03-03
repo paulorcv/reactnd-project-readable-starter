@@ -54,7 +54,7 @@ export function handleReceivePosts(category) {
     return (dispatch) => {
       dispatch(showLoading());
       (
-        category === undefined || category === ''
+        category === undefined || category === '' || category === 'all'
           ? getPosts()
           : getPostsByCategory(category)
       ).then((posts) => {

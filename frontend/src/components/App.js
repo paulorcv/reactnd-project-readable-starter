@@ -5,7 +5,6 @@ import NavBar from './NavBar';
 import PostsList from './PostsList'
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { handleReceiveCategories } from '../actions/categories'
-import { handleReceivePosts } from '../actions/posts'
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -16,8 +15,6 @@ class App extends Component {
   
   componentDidMount(){
       this.props.dispatch(handleReceiveCategories());
-      this.props.dispatch(handleReceivePosts(''));
-
 }
 
   render() {
