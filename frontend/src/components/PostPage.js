@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
-
+import { handleReceivePosts } from '../actions/posts'
 
 const styles = theme => ({
   button: {
@@ -16,9 +16,24 @@ const styles = theme => ({
 
 class PostPage extends Component {
 
+  // componentDidMount(){
+  //   const { id, posts } = this.props.match.params;
+  //   id!== undefined && (
+  //     this.props.dispatch(handleReceivePosts())
+  //   );
+  // }
+
   render() {
-    const { id, category} = this.props.match.params;      
-    const { classes, post }  = this.props;
+    const { classes, category, id, post }  = this.props;
+    // const { id } = this.props.match.params;
+
+    console.log('post:');
+    console.log(post);
+    console.log('category:');
+    console.log(category);
+    console.log('id:');
+    console.log(id);
+
 
 return (
 <div>
@@ -56,19 +71,24 @@ return (
 
 function mapStateToProps( {posts, loading}, props){
  
-  const { category, id } = props.match.params;  
-  let post = {};
-  Object.keys(posts).map(index=>{
-    if( posts[index].id === id){
-      return post = posts[index];
-    }
-  });
+  const { id } = props.match.params;  
+  console.log('===>id:' + id);
+
+    let post = {};
+    Object.keys(posts).map(index=>{
+      if( posts[index].id === id){
+        return post = posts[index];
+      }
+    });
+
+    const category = post.category;
 
   return { 
     post,
-    category
+    category,
+    id
   }
 }
 
-export default connect(mapStateToProps)(withStyles(styles)(PostPage))
+export default connect()(withStyles(styles)(PostPage))
 

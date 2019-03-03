@@ -18,8 +18,19 @@ export function receiveCategories(categories){
     }
 }
 
-export function handleReceiveCategories() {
-    return dispatch => getCategories().then((categories) => {
-      dispatch(receiveCategories(categories));
-    });
-  }
+// export function handleReceiveCategories() {
+//     return dispatch => getCategories().then((categories) => {
+//       dispatch(receiveCategories(categories));
+//     });
+//   }
+
+  export function handleReceiveCategories(){
+    return(dispatch) =>{
+        dispatch(showLoading())
+        return getCategories()
+            .then(({categories}) =>{
+                dispatch(receiveCategories(categories));                
+                dispatch(hideLoading())
+            });
+    }
+}
