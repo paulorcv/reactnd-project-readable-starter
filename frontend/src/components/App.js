@@ -4,19 +4,21 @@ import theme from '../styles/theme'
 import NavBar from './NavBar';
 import PostsList from './PostsList'
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { handleInitialData } from '../actions/shared'
+import { handleReceiveCategories } from '../actions/categories'
+import { handleReceivePosts } from '../actions/posts'
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import PostPage from '../components/PostPage';
 import LoadingBar from 'react-redux-loading'
 
-
 class App extends Component {
   
   componentDidMount(){
-    this.props.dispatch(handleInitialData());
-  }
+      this.props.dispatch(handleReceiveCategories());
+      this.props.dispatch(handleReceivePosts(''));
+
+}
 
   render() {
     return (

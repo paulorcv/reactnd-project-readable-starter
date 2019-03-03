@@ -17,6 +17,11 @@ import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
+// import { setCategoriesFilter }  from '../actions/categories';
+// import { setPostsFromCategoryFilter } from '../actions/posts'
+
+
+
 
 const styles = theme => ({
     button: {      
@@ -41,8 +46,18 @@ const styles = theme => ({
 
 export class PostsList extends Component {
   
+    componentDidMount(){
+        // const { category } = this.props;
+        // if( category.trim() !== 'all'){
+        //     this.props.dispatch(setCategoriesFilter(category));
+        //     this.props.dispatch(setPostsFromCategoryFilter(category));
+        // }
+        // console.log('category:');
+        // console.log(category);
+    }
+
     render() {
-    const { posts, classes }  = this.props;
+    const { posts, classes}  = this.props;    
     return (
       <div>
         <Grid container spacing={24} className={classes.gridContainer}>
@@ -78,7 +93,7 @@ export class PostsList extends Component {
                         <Button variant='contained' 
                                 color='primary' 
                                 className={classes.button}
-                                component={Link} to={`/posts/${posts[id].id}`} >                    
+                                component={Link} to={`/${posts[id].category}/${posts[id].id}`} >                    
                             View
                         </Button>
                     </CardActions>                    
@@ -92,8 +107,14 @@ export class PostsList extends Component {
   }
 }
 
-function mapStateToProps({posts}){
-    return {posts}
+function mapStateToProps({posts}, props){
+    
+    const { category } = props.match.params;
+
+    return {
+        posts,
+        category
+    }
   }
   
   export default withRouter(connect(mapStateToProps)(withStyles(styles)(PostsList)))

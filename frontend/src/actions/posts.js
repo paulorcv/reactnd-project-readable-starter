@@ -1,5 +1,5 @@
 import { showLoading, hideLoading } from 'react-redux-loading'
-import {getPost} from '../api/api';
+import {getPost, getPosts, getPostsByCategory} from '../api/api';
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
 export const SET_POSTS_FROM_CATEGORIES_FILTER = 'SET_POSTS_FROM_CATEGORIES_FILTER';
 export const RECEIVE_POST = 'RECEIVE_POST';
@@ -36,3 +36,30 @@ export function handleReceivePost(id){
             });
     }
 }
+// export function handleReceivePosts(category){
+//     return(dispatch) =>{
+//         dispatch(showLoading())
+//             category === undefined || category === '' || category === 'all' ?
+//             getPosts()
+//             :
+//             getPostsByCategory(category)
+//             .then(({posts}) =>{
+//                 dispatch(receivePosts(posts)); 
+//                 dispatch(hideLoading())
+//             });
+//     }
+// }
+
+export function handleReceivePosts(category) {
+    return (dispatch) => {
+      dispatch(showLoading());
+      (
+        category === undefined || category === ''
+          ? getPosts()
+          : getPostsByCategory(category)
+      ).then((posts) => {
+        dispatch(receivePosts(posts));
+        dispatch(hideLoading());
+      });
+    };
+  }

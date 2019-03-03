@@ -9,7 +9,8 @@ export default function categories( state={}, action){
             }
 
         case SET_CATEGORIES_FILTER:
-            const indexFilter = Object.keys(state).filter(id => state[id].name.trim() === action.filter);
+            
+           const indexFilter = Object.keys(state).filter(id => state[id].name.trim() === action.filter);
             let categoryFiltered = {
                 [indexFilter[0]]:{
                     ...state[indexFilter]

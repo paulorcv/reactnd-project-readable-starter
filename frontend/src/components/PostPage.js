@@ -17,7 +17,7 @@ const styles = theme => ({
 class PostPage extends Component {
 
   render() {
-    const { id } = this.props.match.params;      
+    const { id, category} = this.props.match.params;      
     const { classes, post }  = this.props;
 
 return (
@@ -56,7 +56,7 @@ return (
 
 function mapStateToProps( {posts, loading}, props){
  
-  const { id } = props.match.params;  
+  const { category, id } = props.match.params;  
   let post = {};
   Object.keys(posts).map(index=>{
     if( posts[index].id === id){
@@ -65,7 +65,8 @@ function mapStateToProps( {posts, loading}, props){
   });
 
   return { 
-    post
+    post,
+    category
   }
 }
 
