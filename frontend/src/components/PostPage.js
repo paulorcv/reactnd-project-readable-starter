@@ -28,7 +28,9 @@ return (
   <div>
       <Grid container spacing={24} className={classes.gridContainer}>
             <Grid key={id} item xs={12} sm={12} lg={12} xl={12}>                    
-            <PostCard post={post} />
+            {post.id && (
+              <PostCard post={post} />
+            )}
         </Grid>
       </Grid>     
   </div>
@@ -40,6 +42,13 @@ function mapStateToProps( {posts, loading}, props){
  
   const { id , category} = props.match.params;  
 
+  if(posts[id] === undefined){
+    return {
+      post: {},
+      category,
+      id
+    }
+  }
   const post = posts[id];
 
   return { 
