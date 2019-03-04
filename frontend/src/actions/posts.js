@@ -1,8 +1,10 @@
-import { showLoading, hideLoading } from 'react-redux-loading'
+import { showLoading, hideLoading } from 'react-redux-loading';
+import convertPosts from '../util/postHelper';
 import {getPost, getPosts, getPostsByCategory} from '../api/api';
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
 export const SET_POSTS_FROM_CATEGORIES_FILTER = 'SET_POSTS_FROM_CATEGORIES_FILTER';
 export const RECEIVE_POST = 'RECEIVE_POST';
+
 
 
 export function receivePosts(posts){
@@ -36,19 +38,6 @@ export function handleReceivePost(id){
             });
     }
 }
-// export function handleReceivePosts(category){
-//     return(dispatch) =>{
-//         dispatch(showLoading())
-//             category === undefined || category === '' || category === 'all' ?
-//             getPosts()
-//             :
-//             getPostsByCategory(category)
-//             .then(({posts}) =>{
-//                 dispatch(receivePosts(posts)); 
-//                 dispatch(hideLoading())
-//             });
-//     }
-// }
 
 export function handleReceivePosts(category) {
     return (dispatch) => {
@@ -65,17 +54,5 @@ export function handleReceivePosts(category) {
     };
   }
   
-  function convertPosts(posts){
-    let postsConverted = {};
 
-    Object.keys(posts).map(key => {
-        let id = posts[key].id;
-        let post = posts[key];
-        postsConverted = { ...postsConverted, [id]: post};
-        return (postsConverted);
-    })
-
-    return postsConverted;
-
-  }
 

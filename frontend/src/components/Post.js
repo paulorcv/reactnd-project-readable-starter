@@ -1,23 +1,26 @@
 import React, { Component } from 'react'
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import CardActions from '@material-ui/core/CardActions';
-import IconButton from '@material-ui/core/IconButton';
-import ThumbUp from '@material-ui/icons/ThumbUp';
-import ThumbDown from '@material-ui/icons/ThumbDown';
-import Avatar from '@material-ui/core/Avatar';
-import Badge from '@material-ui/core/Badge';
-import Message from '@material-ui/icons/Message';
-import Chip from '@material-ui/core/Chip';
-import Category from '@material-ui/icons/Category';
-import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
 
 
 const styles = theme => ({
+    form: {
+        display: 'flex',
+        flexWrap: 'wrap',
+      },    
+      textField: {
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+        // width: 400,
+      },
+      dense: {
+        marginTop: 19,
+      },
+      menu: {
+        width: 200,
+      },
+
     button: {      
       margin: 20
     },
@@ -39,46 +42,112 @@ const styles = theme => ({
   
 
 export class Post extends Component {
-  render() {
+
+    state = {
+    };
+
+    handleSave = () => {
+        console.log('saved');
+        console.log(this.state);
+    }
+    
+    handleChange = name => event => {
+    const post = this.s
+    this.setState({ [name]: event.target.value });
+    }
+
+    componentDidMount(){
+        const { post } = this.props;
+        this.setState(post)
+    }
+
+    render() {
 
     const { post, classes } = this.props;
 
     return (
       <div>
-        <Card classsName={classes.card} >
-                <CardHeader 
-                    title={post.title}
-                    subheader={post.author}
-                    className={classes.cardHeader} />                       
-                    <CardContent>
-                        <Typography component="p" className={classes.typography}>
-                            {post.body}
-                        </Typography>
-                        <Chip label={post.category} 
-                              icon={<Category />} 
-                              color='secondary' />
-                    </CardContent>    
-                    <CardActions>
-                        <Avatar aria-label='SCORE' className={classes.avatar}>
-                            {post.voteScore}
-                        </Avatar>    
-                        <IconButton aria-label='Vote UP'>
-                            <ThumbUp />
-                        </IconButton>
-                        <IconButton aria-label='Vote DOWN'>
-                            <ThumbDown />
-                        </IconButton>
-                        <Badge badgeContent={post.commentCount} color="primary">
-                            <Message />
-                        </Badge>      
-                        <Button variant='contained' 
-                                color='primary' 
-                                className={classes.button}
-                                component={Link} to={`/${post.category}/${post.id}`} >                    
-                            EDIT
-                        </Button>
-                    </CardActions>                    
-                </Card>         
+       <form className={classes.form} >
+       <TextField
+          id="post-title"
+          label="Title"
+          className={classes.textField}
+          value={this.state.title}
+          onChange={this.handleChange('title')}
+          margin="normal"
+          fullWidth      
+          defaultValue=" "
+
+        />
+
+     <TextField
+          id="post-body"
+          label="Body"
+          multiline
+          rows="10"
+          value={this.state.body}
+          className={classes.textField}
+          margin="normal"
+          fullWidth
+          defaultValue=" "
+        />
+
+      <TextField
+          id="post-author"
+          label="Title"
+          className={classes.textField}
+          value={this.state.author}
+          onChange={this.handleChange('author')}
+          margin="normal"
+          fullWidth
+          defaultValue=" "
+        />    
+
+      <TextField
+          id="post-category"
+          label="Category"
+          className={classes.textField}
+          value={this.state.category}
+          margin="normal"
+          defaultValue=" "
+          fullWidth   
+          InputProps={{
+          readOnly: true,
+          }}
+          defaultValue=" "
+        />
+
+      <TextField
+          id="post-voteScore"
+          label="Vote Score"
+          className={classes.textField}
+          value={this.state.voteScore}
+          margin="normal"
+          fullWidth   
+          InputProps={{
+          readOnly: true,
+          }}
+          defaultValue=" "   
+        />       
+
+      <TextField
+          id="post-commentCount"
+          label="Comments"
+          className={classes.textField}
+          value={this.state.commentCount}
+          margin="normal"
+          fullWidth   
+          InputProps={{
+          readOnly: true,
+          }}
+          defaultValue=" "                 
+        />  
+      <Button variant="contained" color="primary" className={classes.button}
+        onClick={()=>this.handleSave()}
+      >
+        SAVE
+      </Button>
+       </form>   
       </div>
     )
   }

@@ -8,6 +8,6 @@ export default combineReducers(
     {
         categories,
         posts ,
-        loadingBar: loadingBarReducer,      
+        loadingBar: loadingBarReducer,     
     }
 );

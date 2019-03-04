@@ -3,7 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import { handleReceivePosts } from '../actions/posts'
 import Grid from '@material-ui/core/Grid';
-import PostCard from '../components/PostCard';
+import Post from '../components/Post';
 
 const styles = theme => ({
   gridContainer:{
@@ -29,7 +29,7 @@ return (
       <Grid container spacing={24} className={classes.gridContainer}>
             <Grid key={id} item xs={12} sm={12} lg={12} xl={12}>                    
             {post.id && (
-              <PostCard post={post} />
+              <Post post={post} />
             )}
         </Grid>
       </Grid>     
