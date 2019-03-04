@@ -58,8 +58,24 @@ export function handleReceivePosts(category) {
           ? getPosts()
           : getPostsByCategory(category)
       ).then((posts) => {
-        dispatch(receivePosts(posts));
+        const postsConverted = convertPosts(posts);  
+        dispatch(receivePosts(postsConverted));
         dispatch(hideLoading());
       });
     };
   }
+  
+  function convertPosts(posts){
+    let postsConverted = {};
+
+    Object.keys(posts).map(key => {
+        let id = posts[key].id;
+        let post = posts[key];
+        postsConverted = { ...postsConverted, [id]: post};
+        return (postsConverted);
+    })
+
+    return postsConverted;
+
+  }
+

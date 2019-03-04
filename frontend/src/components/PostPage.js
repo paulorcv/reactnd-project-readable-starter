@@ -16,12 +16,12 @@ const styles = theme => ({
 
 class PostPage extends Component {
 
-  // componentDidMount(){
-  //   const { id, posts } = this.props.match.params;
-  //   id!== undefined && (
-  //     this.props.dispatch(handleReceivePosts())
-  //   );
-  // }
+  componentDidMount(){
+    const { id, category } = this.props;
+    id!== undefined && (
+      this.props.dispatch(handleReceivePosts(category))
+    );
+  }
 
   render() {
     const { classes, category, id, post }  = this.props;
@@ -34,6 +34,7 @@ class PostPage extends Component {
     console.log('id:');
     console.log(id);
 
+    
 
 return (
 <div>
@@ -71,8 +72,11 @@ return (
 
 function mapStateToProps( {posts, loading}, props){
  
-  const { id } = props.match.params;  
-  console.log('===>id:' + id);
+  const { id , category} = props.match.params;  
+
+  // console.log('mapStateToProps');
+  // console.log('props');
+  // console.log(props);
 
     let post = {};
     Object.keys(posts).map(index=>{
@@ -81,8 +85,6 @@ function mapStateToProps( {posts, loading}, props){
       }
     });
 
-    const category = post.category;
-
   return { 
     post,
     category,
@@ -90,5 +92,5 @@ function mapStateToProps( {posts, loading}, props){
   }
 }
 
-export default connect()(withStyles(styles)(PostPage))
+export default connect(mapStateToProps)(withStyles(styles)(PostPage))
 
