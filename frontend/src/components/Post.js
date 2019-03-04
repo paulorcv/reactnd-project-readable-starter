@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-
+import { handleUpdatePost } from '../actions/posts'
+import { connect } from 'react-redux';
 
 const styles = theme => ({
     form: {
@@ -47,6 +48,8 @@ export class Post extends Component {
     };
 
     handleSave = () => {
+        const post = this.state;
+        this.props.dispatch(handleUpdatePost(post));
         console.log('saved');
         console.log(this.state);
     }
@@ -153,4 +156,4 @@ export class Post extends Component {
   }
 }
 
-export default withStyles(styles)(Post);
+export default connect()(withStyles(styles)(Post));

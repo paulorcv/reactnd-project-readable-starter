@@ -1,4 +1,4 @@
-import { RECEIVE_POSTS, SET_POSTS_FROM_CATEGORIES_FILTER, RECEIVE_POST } from '../actions/posts';
+import { RECEIVE_POSTS, SET_POSTS_FROM_CATEGORIES_FILTER, RECEIVE_POST, UPDATE_POST } from '../actions/posts';
 
 export default function posts( state={}, action){
     switch(action.type){
@@ -8,6 +8,15 @@ export default function posts( state={}, action){
              ...state,
              ...action.post
          }
+
+        case UPDATE_POST:
+            
+            let posts = Object.keys(state).filter( id => id !== action.post.id);
+         
+            return{
+                ...posts,
+                [action.post.id] : action.post
+            } 
         
         case RECEIVE_POSTS:
             return{
@@ -16,12 +25,7 @@ export default function posts( state={}, action){
             }
             case SET_POSTS_FROM_CATEGORIES_FILTER:
 
-            console.log('state');
-            console.log(state);            
             const indexPostsFilter = Object.keys(state).filter(id => state[id].category.trim() === action.filter);
-            console.log('indexFilter:');
-            console.log(indexPostsFilter);
-
             let postsFiltered = {};
 
             indexPostsFilter.map( (index)=>{
@@ -33,8 +37,6 @@ export default function posts( state={}, action){
                 }
             });
             
-            console.log('postsFiltered:');
-            console.log(postsFiltered);
             return postsFiltered;  
 
             default:

@@ -1,30 +1,48 @@
 import { showLoading, hideLoading } from 'react-redux-loading';
 import convertPosts from '../util/postHelper';
-import {getPost, getPosts, getPostsByCategory} from '../api/api';
+import {getPost, getPosts, getPostsByCategory, updatePost} from '../api/api';
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
 export const SET_POSTS_FROM_CATEGORIES_FILTER = 'SET_POSTS_FROM_CATEGORIES_FILTER';
 export const RECEIVE_POST = 'RECEIVE_POST';
+export const UPDATE_POST = 'UPDATE_POST';
 
+export function updatePostAction(post){
+    return{
+        type: UPDATE_POST,
+        post
+    }
+}
 
-
-export function receivePosts(posts){
+export function receivePostsAction(posts){
     return{
         type: RECEIVE_POSTS,
         posts
     }
 }
 
-export function receivePost(post){
+export function receivePostAction(post){
     return{
         type: RECEIVE_POST,
         post
     }
 }
 
-export function setPostsFromCategoryFilter(filter){
+
+export function setPostsFromCategoryFilterAction(filter){
     return{
         type : SET_POSTS_FROM_CATEGORIES_FILTER,
         filter
+    }
+}
+
+export function handleUpdatePost(post){
+    return(dispatch) => {
+        dispatch(showLoading());
+        return updatePost(post)
+            .then((post)=> {
+                dispatch(updatePostAction(post));
+                dispatch(hideLoading());
+            }); 
     }
 }
 
@@ -33,7 +51,7 @@ export function handleReceivePost(id){
         dispatch(showLoading())
         return getPost(id)
             .then(({post}) =>{
-                dispatch(receivePost(post));                
+                dispatch(receivePostAction(post));                
                 dispatch(hideLoading())
             });
     }
@@ -48,7 +66,7 @@ export function handleReceivePosts(category) {
           : getPostsByCategory(category)
       ).then((posts) => {
         const postsConverted = convertPosts(posts);  
-        dispatch(receivePosts(postsConverted));
+        dispatch(receivePostsAction(postsConverted));
         dispatch(hideLoading());
       });
     };

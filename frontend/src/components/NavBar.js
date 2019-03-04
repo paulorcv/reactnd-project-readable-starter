@@ -15,8 +15,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import CategoryIcon from '@material-ui/icons/Category';
 import ClearAllIcon from '@material-ui/icons/ClearAll';
 import { connect } from 'react-redux'
-import { setCategoriesFilter }  from '../actions/categories';
-import { setPostsFromCategoryFilter } from '../actions/posts'
+import { setCategoriesFilterAction }  from '../actions/categories';
+import { setPostsFromCategoryFilterAction } from '../actions/posts'
 import { handleInitialData } from '../actions/shared';
 import { withStyles } from '@material-ui/core/styles';
 import { withRouter } from 'react-router-dom'
@@ -48,8 +48,8 @@ class NavBar extends Component {
   
    handleFilter(filterName){     
     this.props.history.push(`/${filterName}`);
-    this.props.dispatch(setCategoriesFilter(filterName));
-    this.props.dispatch(setPostsFromCategoryFilter(filterName));
+    this.props.dispatch(setCategoriesFilterAction(filterName));
+    this.props.dispatch(setPostsFromCategoryFilterAction(filterName));
     this.handleDrawerClose();
    }  
 

@@ -33,9 +33,74 @@ fetch(`${api}/${category}/posts`, { headers })
   .then(res => res.json())
         
 
-      export const getCategories = () =>
+export const getCategories = () =>
   fetch(`${api}/categories`, { headers })
     .then(res => res.json())
     .then(data => data.categories)
 
+export const updatePost = post => fetch(`${api}/posts/${post.id}`, {
+  method: 'PUT',
+  headers: {
+    ...headers,
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(post),
+}).then(res => res.json());
 
+
+export const createPost = post => fetch(`${api}/posts`, {
+  method: 'POST',
+  headers: {
+    ...headers,
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(post),
+}).then(res => res.json());
+
+export const deletePost = postId => fetch(`${api}/posts/${postId}`, { method: 'DELETE', headers })
+.then(res => res.json());
+  
+export const votePost = (postId, option) => fetch(`${api}/posts/${postId}`, {
+  method: 'POST',
+  headers: {
+    ...headers,
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({ option }),
+}).then(res => res.json());    
+
+export const getComments = postId => fetch(`${api}/posts/${postId}/comments`, { headers })
+  .then(res => res.json());
+
+export const getComment = commentId => fetch(`${api}/comments/${commentId}`, { headers })
+  .then(res => res.json());
+
+export const createComment = comment => fetch(`${api}/comments`, {
+  method: 'POST',
+  headers: {
+    ...headers,
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(comment),
+}).then(res => res.json());
+
+export const updateComment = comment => fetch(`${api}/comments`, {
+  method: 'PUT',
+  headers: {
+    ...headers,
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(comment),
+}).then(res => res.json());
+
+export const deleteComment = commentId => fetch(`${api}/comments/${commentId}`, { method: 'DELETE', headers })
+  .then(res => res.json());
+
+export const voteComment = (commentId, option) => fetch(`${api}/comments/${commentId}`, {
+  method: 'POST',
+  headers: {
+    ...headers,
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({ option }),
+}).then(res => res.json());
