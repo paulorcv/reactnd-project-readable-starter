@@ -25,15 +25,6 @@ class PostPage extends Component {
 
   render() {
     const { classes, category, id, post }  = this.props;
-    // const { id } = this.props.match.params;
-
-    console.log('post:');
-    console.log(post);
-    console.log('category:');
-    console.log(category);
-    console.log('id:');
-    console.log(id);
-
     
 
 return (
@@ -74,16 +65,7 @@ function mapStateToProps( {posts, loading}, props){
  
   const { id , category} = props.match.params;  
 
-  // console.log('mapStateToProps');
-  // console.log('props');
-  // console.log(props);
-
-    let post = {};
-    Object.keys(posts).map(index=>{
-      if( posts[index].id === id){
-        return post = posts[index];
-      }
-    });
+  const post = posts[id];
 
   return { 
     post,

@@ -52,8 +52,6 @@ export class PostsList extends Component {
 
     render() {
     const { posts, classes}  = this.props;    
-    console.log('posts:');
-    console.log(posts);
     return (
       <div>
         <Grid container spacing={24} className={classes.gridContainer}>
@@ -105,15 +103,6 @@ export class PostsList extends Component {
 
 function mapStateToProps({posts}, props){
     
-    // let postsConverted = {};
-
-    // Object.keys(posts).map(key => {
-    //     let id = posts[key].id;
-    //     let post = posts[key];
-    //     postsConverted = { ...postsConverted, [id]: post};
-    //     return (postsConverted);
-    // })
-
     const { category } = props.match.params;
 
     return {
