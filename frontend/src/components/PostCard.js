@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
@@ -13,13 +12,9 @@ import Badge from '@material-ui/core/Badge';
 import Message from '@material-ui/icons/Message';
 import Chip from '@material-ui/core/Chip';
 import Category from '@material-ui/icons/Category';
-import { connect } from 'react-redux'
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
-// import { setCategoriesFilter }  from '../actions/categories';
-// import { setPostsFromCategoryFilter } from '../actions/posts'
-import { handleReceivePosts } from '../actions/posts'
 
 
 const styles = theme => ({
@@ -43,37 +38,29 @@ const styles = theme => ({
   });
   
 
-export class PostsList extends Component {
-  
-    componentDidMount(){
-        const { category } = this.props;
-        this.props.dispatch(handleReceivePosts(category)); 
-    }
+export class PostCard extends Component {
+  render() {
 
-    render() {
-    const { posts, classes}  = this.props;    
+    const { post, classes } = this.props;
+
     return (
       <div>
-        <Grid container spacing={24} className={classes.gridContainer}>
-            {Object.keys(posts).map(id =>(
-                <Grid key={id} item xs={12} sm={6} lg={3} xl={3}>                    
-                
-                <Card classsName={classes.card} >
+        <Card classsName={classes.card} >
                 <CardHeader 
-                    title={posts[id].title}
-                    subheader={posts[id].author}
+                    title={post.title}
+                    subheader={post.author}
                     className={classes.cardHeader} />                       
                     <CardContent>
                         <Typography component="p" className={classes.typography}>
-                            {posts[id].body}
+                            {post.body}
                         </Typography>
-                        <Chip label={posts[id].category} 
+                        <Chip label={post.category} 
                               icon={<Category />} 
                               color='secondary' />
                     </CardContent>    
                     <CardActions>
                         <Avatar aria-label='SCORE' className={classes.avatar}>
-                            {posts[id].voteScore}
+                            {post.voteScore}
                         </Avatar>    
                         <IconButton aria-label='Vote UP'>
                             <ThumbUp />
@@ -81,34 +68,20 @@ export class PostsList extends Component {
                         <IconButton aria-label='Vote DOWN'>
                             <ThumbDown />
                         </IconButton>
-                        <Badge badgeContent={posts[id].commentCount} color="primary">
+                        <Badge badgeContent={post.commentCount} color="primary">
                             <Message />
                         </Badge>      
                         <Button variant='contained' 
                                 color='primary' 
                                 className={classes.button}
-                                component={Link} to={`/${posts[id].category}/${posts[id].id}`} >                    
+                                component={Link} to={`/${post.category}/${post.id}`} >                    
                             View
                         </Button>
                     </CardActions>                    
-                </Card> 
-            </Grid>
-            ))}
-        </Grid>      
-          
+                </Card>         
       </div>
     )
   }
 }
 
-function mapStateToProps({posts}, props){
-    
-    const { category } = props.match.params;
-
-    return {
-        posts,
-        category
-    }
-  }
-  
-  export default withRouter(connect(mapStateToProps)(withStyles(styles)(PostsList)))
+export default withStyles(styles)(PostCard);
