@@ -8,7 +8,8 @@ import { Redirect } from 'react-router-dom'
 import IconButton from '@material-ui/core/IconButton';
 import ThumbUp from '@material-ui/icons/ThumbUp';
 import ThumbDown from '@material-ui/icons/ThumbDown';
-
+import { handleReceiveComments } from '../actions/comments';
+import Comment from '../components/Comment';
 
 const styles = theme => ({
     form: {
@@ -53,6 +54,12 @@ export class Post extends Component {
         toHome: false
     };
     
+  componentDidMount(){
+      const { post } = this.props;
+      this.setState(post)
+      this.props.dispatch(handleReceiveComments(post.id));
+  }
+
   handleVoteUp(id){
     this.setState((state, props) => ({
       voteScore: state.voteScore + 1
@@ -79,16 +86,11 @@ export class Post extends Component {
     this.setState({ [name]: event.target.value });
     }
 
-    componentDidMount(){
-        const { post } = this.props;
-        this.setState(post)
-    }
-
     render() {
 
-    const { classes, category, post } = this.props;
+    const { classes, category, post, comments } = this.props;
     const { toHome } = this.state;
-
+    
     if (toHome === true) {
         return <Redirect to={`/${category}`} />
     }
@@ -181,10 +183,19 @@ export class Post extends Component {
       >
         SAVE
       </Button>
+       { Object.keys(comments).map( (key) => (
+         <Comment comment={comments[key]} />
+       ))}
        </form>   
       </div>
     )
   }
 }
 
-export default connect()(withStyles(styles)(Post));
+function mapStateToProps( {comments}){
+  return { 
+    comments
+  }
+}
+
+export default connect(mapStateToProps)(withStyles(styles)(Post));

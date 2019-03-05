@@ -36,7 +36,7 @@ return (
   }
 }
 
-function mapStateToProps( {posts, loading}, props){
+function mapStateToProps( {posts}, props){
  
   const { id , category} = props.match.params;  
 
