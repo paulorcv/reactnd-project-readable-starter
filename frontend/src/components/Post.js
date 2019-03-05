@@ -4,6 +4,8 @@ import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { handleUpdatePost } from '../actions/posts'
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom'
+
 
 const styles = theme => ({
     form: {
@@ -45,17 +47,18 @@ const styles = theme => ({
 export class Post extends Component {
 
     state = {
+        toHome: false
     };
 
     handleSave = () => {
         const post = this.state;
         this.props.dispatch(handleUpdatePost(post));
-        console.log('saved');
-        console.log(this.state);
+        this.setState(() => ({
+            toHome: true,
+          }))
     }
     
     handleChange = name => event => {
-    const post = this.s
     this.setState({ [name]: event.target.value });
     }
 
@@ -66,7 +69,12 @@ export class Post extends Component {
 
     render() {
 
-    const { post, classes } = this.props;
+    const { classes, category } = this.props;
+    const { toHome } = this.state;
+
+    if (toHome === true) {
+        return <Redirect to={`/${category}`} />
+    }
 
     return (
       <div>
@@ -90,6 +98,7 @@ export class Post extends Component {
           rows="10"
           value={this.state.body}
           className={classes.textField}
+          onChange={this.handleChange('body')}
           margin="normal"
           fullWidth
           defaultValue=" "
@@ -117,7 +126,6 @@ export class Post extends Component {
           InputProps={{
           readOnly: true,
           }}
-          defaultValue=" "
         />
 
       <TextField
