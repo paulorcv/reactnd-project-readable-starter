@@ -2,9 +2,12 @@ import React, { Component } from 'react'
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { handleUpdatePost } from '../actions/posts'
+import { handleUpdatePost, handleVotePost } from '../actions/posts'
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom'
+import IconButton from '@material-ui/core/IconButton';
+import ThumbUp from '@material-ui/icons/ThumbUp';
+import ThumbDown from '@material-ui/icons/ThumbDown';
 
 
 const styles = theme => ({
@@ -49,7 +52,21 @@ export class Post extends Component {
     state = {
         toHome: false
     };
+    
+  handleVoteUp(id){
+    this.setState((state, props) => ({
+      voteScore: state.voteScore + 1
+    }));      
+    this.props.dispatch(handleVotePost(id, 'upVote'));
+  }
 
+  handleVoteDown(id){
+    this.setState((state, props) => ({
+      voteScore: state.voteScore - 1
+    }));      
+
+    this.props.dispatch(handleVotePost(id, 'downVote'));
+  }  
     handleSave = () => {
         const post = this.state;
         this.props.dispatch(handleUpdatePost(post));
@@ -69,7 +86,7 @@ export class Post extends Component {
 
     render() {
 
-    const { classes, category } = this.props;
+    const { classes, category, post } = this.props;
     const { toHome } = this.state;
 
     if (toHome === true) {
@@ -140,6 +157,12 @@ export class Post extends Component {
           }}
           defaultValue=" "   
         />       
+      <IconButton aria-label='Vote UP' onClick={()=>this.handleVoteUp(post.id)}>
+          <ThumbUp />
+      </IconButton>
+      <IconButton aria-label='Vote DOWN' onClick={()=>this.handleVoteDown(post.id)}>
+          <ThumbDown />
+      </IconButton>
 
       <TextField
           id="post-commentCount"

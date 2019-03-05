@@ -5,9 +5,17 @@ import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import { handleReceivePosts } from '../actions/posts'
 import PostCard from '../components/PostCard';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+
 
 
 const styles = theme => ({
+    fab:{
+      position: 'absolute',
+      bottom: theme.spacing.unit * 2,
+      right: theme.spacing.unit * 2,
+    },
     button: {      
       margin: 20
     },
@@ -29,14 +37,18 @@ const styles = theme => ({
   
 
 export class PostsPage extends Component {
-  
+
+    handleNewPost(category){
+      this.props.history.push(`/${category}/new`);
+    }
+
     componentDidMount(){
         const { category } = this.props;
         this.props.dispatch(handleReceivePosts(category)); 
     }
 
     render() {
-    const { posts, classes}  = this.props;    
+    const { posts, classes, category}  = this.props;    
     return (
       <div>
         <Grid container spacing={24} className={classes.gridContainer}>
@@ -46,6 +58,14 @@ export class PostsPage extends Component {
             </Grid>
             ))}
         </Grid>      
+        <Fab 
+          className={classes.fab} 
+          color="primary" 
+          aria-label="New Post" 
+          className={classes.fab}
+          onClick={()=>this.handleNewPost(category)}>
+          <AddIcon />
+        </Fab>
           
       </div>
     )
