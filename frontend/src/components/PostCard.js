@@ -15,6 +15,8 @@ import Category from '@material-ui/icons/Category';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
+import { handleVotePost } from '../actions/posts';
 
 
 const styles = theme => ({
@@ -39,6 +41,15 @@ const styles = theme => ({
   
 
 export class PostCard extends Component {
+
+    handleVoteUp(id){
+        this.props.dispatch(handleVotePost(id, 'upVote'));
+    }
+
+    handleVoteDown(id){
+        this.props.dispatch(handleVotePost(id, 'downVote'));
+    }    
+
   render() {
 
     const { post, classes } = this.props;
@@ -62,10 +73,10 @@ export class PostCard extends Component {
                         <Avatar aria-label='SCORE' className={classes.avatar}>
                             {post.voteScore}
                         </Avatar>    
-                        <IconButton aria-label='Vote UP'>
+                        <IconButton aria-label='Vote UP' onClick={()=>this.handleVoteUp(post.id)}>
                             <ThumbUp />
                         </IconButton>
-                        <IconButton aria-label='Vote DOWN'>
+                        <IconButton aria-label='Vote DOWN' onClick={()=>this.handleVoteDown(post.id)}>
                             <ThumbDown />
                         </IconButton>
                         <Badge badgeContent={post.commentCount} color="primary">
@@ -84,4 +95,4 @@ export class PostCard extends Component {
   }
 }
 
-export default withStyles(styles)(PostCard);
+export default connect()(withStyles(styles)(PostCard));

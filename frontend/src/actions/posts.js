@@ -1,10 +1,23 @@
 import { showLoading, hideLoading } from 'react-redux-loading';
 import convertPosts from '../util/postHelper';
-import {getPost, getPosts, getPostsByCategory, updatePost} from '../api/api';
+import {getPost, getPosts, getPostsByCategory, updatePost, votePost} from '../api/api';
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
 export const SET_POSTS_FROM_CATEGORIES_FILTER = 'SET_POSTS_FROM_CATEGORIES_FILTER';
 export const RECEIVE_POST = 'RECEIVE_POST';
 export const UPDATE_POST = 'UPDATE_POST';
+
+
+export function handleVotePost(id, option){
+    return (dispatch) =>{
+        dispatch(showLoading());
+        return votePost(id, option)
+        .then( (post) => {
+            dispatch(updatePostAction(post));
+            dispatch(hideLoading());
+        });
+    }
+}
+
 
 export function updatePostAction(post){
     return{
@@ -12,6 +25,7 @@ export function updatePostAction(post){
         post
     }
 }
+
 
 export function receivePostsAction(posts){
     return{
