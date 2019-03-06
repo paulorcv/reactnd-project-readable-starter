@@ -12,6 +12,7 @@ import Avatar from '@material-ui/core/Avatar';
 import { handleVoteComment } from '../actions/comments';
 import { connect } from 'react-redux';
 
+
 const styles = theme => ({
     button: {      
       margin: 20
@@ -49,7 +50,7 @@ export class Comment extends Component {
 
     return (
         <div>
-        <Card classsName={classes.card} >
+        <Card classsName={classes.card} elevation={5}>
                 <CardHeader 
                     title={comment.author}
                     subheader={comment.timestamp}

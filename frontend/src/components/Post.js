@@ -12,9 +12,17 @@ import { handleReceiveComments } from '../actions/comments';
 import Comment from '../components/Comment';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
+import Paper from '@material-ui/core/Paper';
+
 
 
 const styles = theme => ({
+    root: {
+      ...theme.mixins.gutters(),
+      paddingTop: theme.spacing.unit * 2,
+      paddingBottom: theme.spacing.unit * 2,
+    },
+
     form: {
         display: 'flex',
         flexWrap: 'wrap',
@@ -100,6 +108,8 @@ export class Post extends Component {
 
     return (
       <div>
+      <Paper className={classes.root} elevation={1}>
+
        <form className={classes.form} >
        <TextField
           id="post-title"
@@ -196,7 +206,8 @@ export class Post extends Component {
             </Grid>
             ))}
         </Grid>            
-       </form>   
+       </form> 
+      </Paper>   
       </div>
     )
   }
