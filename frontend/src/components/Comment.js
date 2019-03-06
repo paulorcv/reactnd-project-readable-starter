@@ -9,8 +9,8 @@ import IconButton from '@material-ui/core/IconButton';
 import ThumbUp from '@material-ui/icons/ThumbUp';
 import ThumbDown from '@material-ui/icons/ThumbDown';
 import Avatar from '@material-ui/core/Avatar';
-import Badge from '@material-ui/core/Badge';
-
+import { handleVoteComment } from '../actions/comments';
+import { connect } from 'react-redux';
 
 const styles = theme => ({
     button: {      
@@ -36,11 +36,11 @@ export class Comment extends Component {
   
   
     handleVoteUp(id){
-        // this.props.dispatch(handleVotePost(id, 'upVote'));
+        this.props.dispatch(handleVoteComment(id, 'upVote'));
     }
 
     handleVoteDown(id){
-        // this.props.dispatch(handleVotePost(id, 'downVote'));
+        this.props.dispatch(handleVoteComment(id, 'downVote'));
     }  
 
     render() {
@@ -76,4 +76,4 @@ export class Comment extends Component {
   }
 }
 
-export default withStyles(styles)(Comment);
+export default connect()(withStyles(styles)(Comment));
