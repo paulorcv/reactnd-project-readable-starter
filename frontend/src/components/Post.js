@@ -10,6 +10,9 @@ import ThumbUp from '@material-ui/icons/ThumbUp';
 import ThumbDown from '@material-ui/icons/ThumbDown';
 import { handleReceiveComments } from '../actions/comments';
 import Comment from '../components/Comment';
+import Grid from '@material-ui/core/Grid';
+import Divider from '@material-ui/core/Divider';
+
 
 const styles = theme => ({
     form: {
@@ -183,9 +186,16 @@ export class Post extends Component {
       >
         SAVE
       </Button>
-       { Object.keys(comments).map( (key) => (
-         <Comment comment={comments[key]} />
-       ))}
+      
+      <Grid container spacing={24} className={classes.gridContainer}>
+            {Object.keys(comments).map(id =>(
+                <Grid key={id} item xs={12} sm={12} lg={12} xl={12}>                    
+                <Comment comment={comments[id]} />
+                <Divider variant="fullWidth" />
+
+            </Grid>
+            ))}
+        </Grid>            
        </form>   
       </div>
     )
