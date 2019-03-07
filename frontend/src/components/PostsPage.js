@@ -62,7 +62,6 @@ export class PostsPage extends Component {
           className={classes.fab} 
           color="primary" 
           aria-label="New Post" 
-          className={classes.fab}
           onClick={()=>this.handleNewPost(category)}>
           <AddIcon />
         </Fab>
