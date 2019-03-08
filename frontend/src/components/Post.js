@@ -1,10 +1,8 @@
+import { withRouter } from 'react-router-dom';
 import React, { Component } from 'react'
-import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import { handleUpdatePost, handleVotePost } from '../actions/posts'
+import { handleVotePost } from '../actions/posts'
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom'
 import IconButton from '@material-ui/core/IconButton';
 import ThumbUp from '@material-ui/icons/ThumbUp';
 import ThumbDown from '@material-ui/icons/ThumbDown';
@@ -13,6 +11,10 @@ import Comment from '../components/Comment';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import Avatar from '@material-ui/core/Avatar';
+
+
 
 
 
@@ -21,8 +23,18 @@ const styles = theme => ({
       ...theme.mixins.gutters(),
       paddingTop: theme.spacing.unit * 2,
       paddingBottom: theme.spacing.unit * 2,
+      width: '100%',
+    },
+ 
+    title:{
+      width: '100%',
+      margin: 'auto'
     },
 
+    body:{
+      width: '100%',
+      margin: 'auto'
+    },    
     form: {
         display: 'flex',
         flexWrap: 'wrap',
@@ -60,118 +72,54 @@ const styles = theme => ({
   
 
 export class Post extends Component {
-
-    state = {
-        toHome: false
-    };
     
   componentDidMount(){
       const { post } = this.props;
-      this.setState(post)
-      this.props.dispatch(handleReceiveComments(post.id));
+      const { id } = this.props.match.params;
+      this.props.dispatch(handleReceiveComments(id));
   }
 
   handleVoteUp(id){
-    this.setState((state, props) => ({
-      voteScore: state.voteScore + 1
-    }));      
     this.props.dispatch(handleVotePost(id, 'upVote'));
   }
 
   handleVoteDown(id){
-    this.setState((state, props) => ({
-      voteScore: state.voteScore - 1
-    }));      
-
     this.props.dispatch(handleVotePost(id, 'downVote'));
   }  
-    handleSave = () => {
-        const post = this.state;
-        this.props.dispatch(handleUpdatePost(post));
-        this.setState(() => ({
-            toHome: true,
-          }))
-    }
     
-    handleChange = name => event => {
-    this.setState({ [name]: event.target.value });
-    }
-
     render() {
 
-    const { classes, category, post, comments } = this.props;
-    const { toHome } = this.state;
-    
-    if (toHome === true) {
-        return <Redirect to={`/${category}`} />
-    }
+    const { classes, post, comments } = this.props;
+    console.log('comments:');
+    console.log(comments);
 
+    
     return (
       <div>
       <Paper className={classes.root} elevation={1}>
 
        <form className={classes.form} >
-       <TextField
-          id="post-title"
-          label="Title"
-          className={classes.textField}
-          value={this.state.title}
-          onChange={this.handleChange('title')}
-          margin="normal"
-          fullWidth      
-          defaultValue=" "
+       <Typography variant="h5" gutterBottom className={classes.title}>
+        {post.title}
+      </Typography>  
 
-        />
+      <Typography variant="subtitle1" gutterBottom>
+        {post.author}
+      </Typography>
 
-     <TextField
-          id="post-body"
-          label="Body"
-          multiline
-          rows="10"
-          value={this.state.body}
-          className={classes.textField}
-          onChange={this.handleChange('body')}
-          margin="normal"
-          fullWidth
-          defaultValue=" "
-        />
 
-      <TextField
-          id="post-author"
-          label="Title"
-          className={classes.textField}
-          value={this.state.author}
-          onChange={this.handleChange('author')}
-          margin="normal"
-          fullWidth
-          defaultValue=" "
-        />    
+      <Typography variant="body1" gutterBottom className={classes.body}>
+        {post.body}
+      </Typography>
 
-      <TextField
-          id="post-category"
-          label="Category"
-          className={classes.textField}
-          value={this.state.category}
-          margin="normal"
-          defaultValue=" "
-          fullWidth   
-          InputProps={{
-          readOnly: true,
-          }}
-        />
+      <Typography variant="h6" gutterBottom className={classes.title}>
+        {post.category}
+      </Typography>
 
-      <TextField
-          id="post-voteScore"
-          label="Vote Score"
-          className={classes.textField}
-          value={this.state.voteScore}
-          margin="normal"
-          fullWidth   
-          InputProps={{
-          readOnly: true,
-          }}
-          defaultValue=" "   
-        />       
+      <Avatar aria-label='SCORE' className={classes.avatar}>
+        {post.voteScore}
+      </Avatar>    
+
       <IconButton aria-label='Vote UP' onClick={()=>this.handleVoteUp(post.id)}>
           <ThumbUp />
       </IconButton>
@@ -179,24 +127,12 @@ export class Post extends Component {
           <ThumbDown />
       </IconButton>
 
-      <TextField
-          id="post-commentCount"
-          label="Comments"
-          className={classes.textField}
-          value={this.state.commentCount}
-          margin="normal"
-          fullWidth   
-          InputProps={{
-          readOnly: true,
-          }}
-          defaultValue=" "                 
-        />  
-      <Button variant="contained" color="primary" className={classes.button}
-        onClick={()=>this.handleSave()}
-      >
-        SAVE
-      </Button>
-      
+      {post.commentCount > 0 && (
+        <Typography variant="h5" gutterBottom className={classes.title}>
+          Comments: {post.commentCount} 
+        </Typography>  
+      )}
+     
       <Grid container spacing={24} className={classes.gridContainer}>
             {Object.keys(comments).map(id =>(
                 <Grid key={id} item xs={12} sm={12} lg={12} xl={12}>                    
@@ -219,4 +155,4 @@ function mapStateToProps( {comments}){
   }
 }
 
-export default connect(mapStateToProps)(withStyles(styles)(Post));
+export default withRouter(connect(mapStateToProps)(withStyles(styles)(Post)));
