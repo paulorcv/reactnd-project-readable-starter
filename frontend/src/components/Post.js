@@ -13,9 +13,10 @@ import Divider from '@material-ui/core/Divider';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
-
-
-
+import Fab from '@material-ui/core/Fab';
+import EditIcon from '@material-ui/icons/Edit';
+import Chip from '@material-ui/core/Chip';
+import Category from '@material-ui/icons/Category';
 
 
 const styles = theme => ({
@@ -33,8 +34,17 @@ const styles = theme => ({
 
     body:{
       width: '100%',
-      margin: 'auto'
+      margin: 20
     },    
+
+    category:{
+      margin: 10,
+    },
+
+    fab:{
+      margin: 10
+    },
+
     form: {
         display: 'flex',
         flexWrap: 'wrap',
@@ -74,7 +84,6 @@ const styles = theme => ({
 export class Post extends Component {
     
   componentDidMount(){
-      const { post } = this.props;
       const { id } = this.props.match.params;
       this.props.dispatch(handleReceiveComments(id));
   }
@@ -100,20 +109,20 @@ export class Post extends Component {
 
        <form className={classes.form} >
        <Typography variant="h5" gutterBottom className={classes.title}>
+       <Chip label={post.category}  icon={<Category />}  color='secondary' className={classes.category} />
         {post.title}
+        <Fab color="primary" aria-label="Edit" className={classes.fab}>
+          <EditIcon onClick={()=>{this.handleEdit()}} />
+        </Fab>                   
       </Typography>  
 
       <Typography variant="subtitle1" gutterBottom>
-        {post.author}
+        {post.author} : {post.timestamp}
       </Typography>
 
 
       <Typography variant="body1" gutterBottom className={classes.body}>
         {post.body}
-      </Typography>
-
-      <Typography variant="h6" gutterBottom className={classes.title}>
-        {post.category}
       </Typography>
 
       <Avatar aria-label='SCORE' className={classes.avatar}>

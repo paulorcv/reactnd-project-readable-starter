@@ -41,7 +41,7 @@ const styles = theme => ({
 export class Comment extends Component {
   
     handleEdit(){
-        //todo: edit comment
+        //todo: edit
         console.log('Edit comment');
     }
 
