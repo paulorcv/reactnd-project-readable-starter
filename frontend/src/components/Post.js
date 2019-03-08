@@ -88,6 +88,11 @@ export class Post extends Component {
       this.props.dispatch(handleReceiveComments(id));
   }
 
+  handleEdit(){
+    //todo: handle edit
+    console.log("edit");
+  }
+
   handleVoteUp(id){
     this.props.dispatch(handleVotePost(id, 'upVote'));
   }
