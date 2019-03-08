@@ -53,7 +53,7 @@ export class PostsPage extends Component {
       <div>
         <Grid container spacing={24} className={classes.gridContainer}>
             {Object.keys(posts).map(id =>(
-                <Grid key={id} item xs={12} sm={6} lg={3} xl={3}>                    
+                <Grid key={id} item xs={12} sm={12} lg={6} xl={6}>                    
                 <PostCard post={posts[id]} />
             </Grid>
             ))}
