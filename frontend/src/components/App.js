@@ -10,6 +10,9 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import PostPage from '../components/PostPage';
 import PostsPage from '../components/PostsPage'
 import LoadingBar from 'react-redux-loading'
+import Components from '../views/Components/Components.jsx';
+import "../assets/scss/material-kit-react.scss?v=1.4.0";
+
 
 class App extends Component {
   
@@ -22,8 +25,7 @@ class App extends Component {
       <MuiThemeProvider theme={theme} >
       <Router basename={process.env.PUBLIC_URL}>
         <React.Fragment>                
-        <CssBaseline />
-        <NavBar/>    
+        {/* <NavBar/>     */}
         <LoadingBar />
           {this.props.loading === true
               ? null
@@ -31,6 +33,8 @@ class App extends Component {
             
             <Route path='/:category' exact component={PostsPage} />
             <Route path='/:category/:id' component={PostPage} />
+            <Route path="/components" component={Components} />
+
           </div>}
 
         </React.Fragment>
