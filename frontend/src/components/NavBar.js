@@ -12,7 +12,7 @@ import { withRouter } from 'react-router-dom'
 //components and assets
 import Header from './Header/Header';
 import Button from "./CustomButtons/Button.jsx";
-import navbarsStyle from '../assets/jss/material-kit-react/views/componentsSections/navbarsStyle.jsx';
+import navbarStyle from '../assets/jss/material-kit-react/views/navbarStyle.jsx';
 
 class NavBar extends Component {
 
@@ -43,6 +43,7 @@ class NavBar extends Component {
             <Header
               brand="READABLE"
               color="primary"
+              
               rightLinks={
                 <List className={classes.list}>
                   <ListItem key='all' className={classes.listItem}>
@@ -83,4 +84,4 @@ function mapStateToProps( {categories} ){
   return { categories }
 }
 
-export default withRouter(connect(mapStateToProps)(withStyles(navbarsStyle)(NavBar)));
+export default withRouter(connect(mapStateToProps)(withStyles(navbarStyle)(NavBar)));
