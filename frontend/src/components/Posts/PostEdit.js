@@ -66,9 +66,6 @@ export class PostEdit extends Component {
   constructor(props){
     super(props);
     const { post } = props;
-    console.log("*constructor post:");
-    console.log(post);
-
     this.state = { post,
                   toHome: false
                  }
@@ -83,11 +80,7 @@ export class PostEdit extends Component {
     const { post } = this.props;
      if(post.id && !this.state.id){
        this.setState(post)
-       console.log('post have an id');
      }
-    console.log("*componentDidUpdate post:");
-    console.log(post);
-
   }
 
   handleVoteUp(id){
@@ -120,9 +113,6 @@ export class PostEdit extends Component {
 
     const { classes, category, post, comments } = this.props;
     const { toHome } = this.state;
-    
-    console.log('=====>post:');
-    console.log(post);
     
     if (toHome === true) {
         return <Redirect to={`/${category}`} />

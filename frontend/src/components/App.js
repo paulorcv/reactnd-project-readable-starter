@@ -31,8 +31,8 @@ class App extends Component {
               : <div>          
             
             <Route path='/:category' exact component={PostsPage} />
-            <Route path='/:category/:id/edit' exact   render={(props) => <PostPage {...props} action="edit" />} />
-            <Route path='/:category/:id' render={(props) => <PostPage {...props} action="view" />} />
+            <Route path='/:category/:id/edit' exact render={(props) => <PostPage {...props} action="edit" />} />
+            <Route path='/:category/:id' exact render={(props) => <PostPage {...props} action="view" />} />
             <Route path="/" exact component={Components} />
             <Route path="/landing-page" component={LandingPage} />
             <Route path="/profile-page" component={ProfilePage} />
