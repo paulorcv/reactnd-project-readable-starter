@@ -11,10 +11,6 @@ import ThumbDown from '@material-ui/icons/ThumbDown';
 import Avatar from '@material-ui/core/Avatar';
 import { handleVoteComment } from '../actions/comments';
 import { connect } from 'react-redux';
-import Fab from '@material-ui/core/Fab';
-import EditIcon from '@material-ui/icons/Edit';
-
-
 
 const styles = theme => ({
     button: {      
@@ -32,19 +28,13 @@ const styles = theme => ({
     },
     typography: {
         padding: 5
-    },
-    fab: {
-        margin: 10,
-      },
+    }
+
   });
 
 export class Comment extends Component {
   
-    handleEdit(){
-        //todo: edit
-        console.log('Edit comment');
-    }
-
+  
     handleVoteUp(id){
         this.props.dispatch(handleVoteComment(id, 'upVote'));
     }
@@ -59,7 +49,7 @@ export class Comment extends Component {
 
     return (
         <div>
-        <Card classsName={classes.card} elevation={5}>
+        <Card classsName={classes.card} elevation={1}>
                 <CardHeader 
                     title={comment.author}
                     subheader={comment.timestamp}
@@ -79,9 +69,6 @@ export class Comment extends Component {
                         <IconButton aria-label='Vote DOWN' onClick={()=>this.handleVoteDown(comment.id)}>
                             <ThumbDown />
                         </IconButton>
-                        <Fab color="secondary" aria-label="Edit" className={classes.fab}>
-                            <EditIcon onClick={()=>{this.handleEdit()}} />
-                        </Fab>                        
                     </CardActions>                    
                 </Card>         
       </div>
