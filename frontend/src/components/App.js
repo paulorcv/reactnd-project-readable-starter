@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
-import theme from '../styles/theme'
 import NavBar from './NavBar';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import { handleReceiveCategories } from '../actions/categories'
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
-import PostPage from '../components/PostPage';
-import PostsPage from '../components/PostsPage'
+import PostPage from '../components/Posts/PostPage';
+import PostsPage from '../components/Posts/PostsPage'
 import LoadingBar from 'react-redux-loading'
 import Components from '../views/Components/Components.jsx';
 import LandingPage from '../views/LandingPage/LandingPage';
@@ -25,10 +22,9 @@ class App extends Component {
 
   render() {
     return (
-      <MuiThemeProvider theme={theme} >
       <Router basename={process.env.PUBLIC_URL}>
         <React.Fragment>                
-        {/* <NavBar/>     */}
+        <NavBar/>    
         <LoadingBar />
           {this.props.loading === true
               ? null
@@ -45,7 +41,6 @@ class App extends Component {
 
         </React.Fragment>
         </Router>      
-      </MuiThemeProvider>
     );
   }
 }

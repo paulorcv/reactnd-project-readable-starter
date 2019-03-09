@@ -1,13 +1,13 @@
 import { withRouter } from 'react-router-dom';
 import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles';
-import { handleVotePost } from '../actions/posts'
+import { handleVotePost } from '../../actions/posts'
 import { connect } from 'react-redux';
 import IconButton from '@material-ui/core/IconButton';
 import ThumbUp from '@material-ui/icons/ThumbUp';
 import ThumbDown from '@material-ui/icons/ThumbDown';
-import { handleReceiveComments } from '../actions/comments';
-import Comment from '../components/Comment';
+import { handleReceiveComments } from '../../actions/comments';
+import Comment from '../Comment';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import Paper from '@material-ui/core/Paper';

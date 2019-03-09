@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { handleUpdatePost, handleVotePost } from '../actions/posts'
+import { handleUpdatePost, handleVotePost } from '../../actions/posts'
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom'
 import IconButton from '@material-ui/core/IconButton';
 import ThumbUp from '@material-ui/icons/ThumbUp';
 import ThumbDown from '@material-ui/icons/ThumbDown';
-import { handleReceiveComments } from '../actions/comments';
-import Comment from '../components/Comment';
+import { handleReceiveComments } from '../../actions/comments';
+import Comment from '../Comment';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import Paper from '@material-ui/core/Paper';

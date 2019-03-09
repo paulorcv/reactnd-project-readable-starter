@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
-import { handleReceivePosts } from '../actions/posts'
+import { handleReceivePosts } from '../../actions/posts'
 import Grid from '@material-ui/core/Grid';
-import Post from '../components/Post';
+import Post from './Post';
 
 const styles = theme => ({
   gridContainer:{

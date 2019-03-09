@@ -3,8 +3,8 @@ import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
-import { handleReceivePosts } from '../actions/posts'
-import PostCard from '../components/PostCard';
+import { handleReceivePosts } from '../../actions/posts'
+import PostCard from './PostCard';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 

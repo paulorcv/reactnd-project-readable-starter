@@ -16,7 +16,7 @@ import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
-import { handleVotePost } from '../actions/posts';
+import { handleVotePost } from '../../actions/posts';
 
 
 const styles = theme => ({
