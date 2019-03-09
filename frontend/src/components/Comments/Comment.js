@@ -9,7 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import ThumbUp from '@material-ui/icons/ThumbUp';
 import ThumbDown from '@material-ui/icons/ThumbDown';
 import Avatar from '@material-ui/core/Avatar';
-import { handleVoteComment } from '../actions/comments';
+import { handleVoteComment } from '../../actions/comments';
 import { connect } from 'react-redux';
 
 const styles = theme => ({
