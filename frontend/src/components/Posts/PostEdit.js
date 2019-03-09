@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Button from '@material-ui/core/Button';
+import Button from "../../components/CustomButtons/Button.jsx";
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { handleUpdatePost, handleVotePost } from '../../actions/posts'
@@ -9,14 +9,17 @@ import IconButton from '@material-ui/core/IconButton';
 import ThumbUp from '@material-ui/icons/ThumbUp';
 import ThumbDown from '@material-ui/icons/ThumbDown';
 import { handleReceiveComments } from '../../actions/comments';
-import { handleReceivePosts } from '../../actions/posts';
 import Comment from '../Comments/Comment';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
-import Paper from '@material-ui/core/Paper';
 import { withRouter } from 'react-router';
 
-
+import postStyle from "../../assets/jss/material-kit-react/views/postStyle.jsx";
+import classNames from "classnames";
+import CustomInput from "../../components/CustomInput/CustomInput.jsx";
+import Avatar from '@material-ui/core/Avatar';
+import InfoArea from "../../components/InfoArea/InfoArea.jsx";
+import Category from '@material-ui/icons/Category';
 
 const styles = theme => ({
     root: {
@@ -119,10 +122,23 @@ export class PostEdit extends Component {
     }
 
     return (
-      <div>
-      <Paper className={classes.root} elevation={1}>
+      <div className={classNames(classes.main, classes.mainRaised)}>
+      <div className={classes.container}>
+      <div className={classes.section}>
 
        <form className={classes.form} >
+       <CustomInput
+                  id="post-title"
+                  inputProps={{
+                    placeholder: "Title",
+                    value:this.state.title,
+                  }}
+                  formControlProps={{
+                    fullWidth: true,
+                    onChange:this.handleChange('title')
+                  }}
+                />
+
        <TextField
           id="post-title"
           label="Title"
@@ -134,7 +150,13 @@ export class PostEdit extends Component {
           defaultValue=" "
 
         />
-
+      <InfoArea
+                title={post.category}
+                description={`by ${post.author} : ${post.timestamp}`}
+                icon={Category}
+                iconColor="info"
+                vertical
+              />   
      <TextField
           id="post-body"
           label="Body"
@@ -159,68 +181,41 @@ export class PostEdit extends Component {
           defaultValue=" "
         />    
 
-      <TextField
-          id="post-category"
-          label="Category"
-          className={classes.textField}
-          value={this.state.category}
-          margin="normal"
-          defaultValue=" "
-          fullWidth   
-          InputProps={{
-          readOnly: true,
-          }}
-        />
-
-      <TextField
-          id="post-voteScore"
-          label="Vote Score"
-          className={classes.textField}
-          value={this.state.voteScore}
-          margin="normal"
-          fullWidth   
-          InputProps={{
-          readOnly: true,
-          }}
-          defaultValue=" "   
-        />       
+      <h4>
+      <Avatar aria-label='SCORE' className={classNames(classes.avatar)}>
+         {post.voteScore}
+       </Avatar>          
       <IconButton aria-label='Vote UP' onClick={()=>this.handleVoteUp(post.id)}>
-          <ThumbUp />
-      </IconButton>
-      <IconButton aria-label='Vote DOWN' onClick={()=>this.handleVoteDown(post.id)}>
-          <ThumbDown />
-      </IconButton>
+           <ThumbUp />
+       </IconButton>
+       <IconButton aria-label='Vote DOWN' onClick={()=>this.handleVoteDown(post.id)}>
+           <ThumbDown />
+       </IconButton>       
+      </h4>
 
-      <TextField
-          id="post-commentCount"
-          label="Comments"
-          className={classes.textField}
-          value={this.state.commentCount}
-          margin="normal"
-          fullWidth   
-          InputProps={{
-          readOnly: true,
-          }}
-          defaultValue=" "                 
-        />  
-      <Button variant="contained" color="primary" className={classes.button}
+      <Button size="lg" color="primary" className={classes.button}
         onClick={()=>this.handleSave()}
       >
         SAVE
       </Button>
-      
-      <Grid container spacing={24} className={classes.gridContainer}>
-            {Object.keys(comments).map(id =>(
-                <Grid key={id} item xs={12} sm={12} lg={12} xl={12}>                    
-                <Comment comment={comments[id]} />
-                <Divider variant="fullWidth" />
+    
+        {post.commentCount > 0 && (
+          <h3 className={classes.title}>
+            Comments: {post.commentCount} 
+          </h3>  
+        )}              
+       <Grid container spacing={24} className={classes.gridContainer}>
+             {Object.keys(comments).map(id =>(
+                 <Grid key={id} item xs={12} sm={12} lg={12} xl={12}>                    
+                 <Comment comment={comments[id]} />
 
-            </Grid>
-            ))}
-        </Grid>            
+             </Grid>
+             ))}
+         </Grid>            
        </form> 
-      </Paper>   
+       </div>
       </div>
+    </div>
     )
   }
 }
@@ -244,4 +239,4 @@ function mapStateToProps( {comments, posts}, props){
 }
   
 
-export default withRouter(connect(mapStateToProps)(withStyles(styles)(PostEdit)));
+export default withRouter(connect(mapStateToProps)(withStyles(postStyle)(PostEdit)));
