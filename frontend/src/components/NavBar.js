@@ -13,8 +13,6 @@ import { withRouter } from 'react-router-dom'
 import Header from './Header/Header';
 import Button from "./CustomButtons/Button.jsx";
 import navbarsStyle from '../assets/jss/material-kit-react/views/componentsSections/navbarsStyle.jsx';
-import Explore from "@material-ui/icons/Explore";
-
 
 class NavBar extends Component {
 
@@ -76,62 +74,7 @@ class NavBar extends Component {
         </div>
       </div>
     );
-    
-    // return (
-
-
-    //   <div className={classes.root}>
-    //     <AppBar position='static'>
-    //     <Toolbar disableGutters={!open}>                        
-    //         <IconButton
-    //           color="inherit"
-    //           aria-label="Open drawer"
-    //           onClick={this.handleDrawerOpen}
-    //           className={classes.menuButton}              
-    //         >
-    //         <MenuIcon />
-    //         </IconButton>                 
-    //           <Typography variant='h4' color='inherit' className={classes.grow} >
-    //               Readable Project
-    //           </Typography>
-    //       </Toolbar>
-    //     </AppBar>
-    //     <Drawer
-    //         variant="persistent"
-    //         anchor="left"
-    //         open={open}
-    //       >
-    //         <div>
-    //           <IconButton onClick={this.handleDrawerClose}>
-    //             <ChevronLeftIcon />
-    //           </IconButton>
-    //         </div>
-    //         <Divider />
-    //         <List>              
-    //           <ListItem button key='clear' onClick={()=>this.handleHome()}>
-    //             <ListItemIcon><HomeIcon /></ListItemIcon>
-    //             <ListItemText primary="Home"/>
-    //           </ListItem>
-    //         </List>
-    //         <List>              
-    //           <ListItem button key='clear' onClick={()=>this.handleAll()}>
-    //             <ListItemIcon><ClearAllIcon /></ListItemIcon>
-    //             <ListItemText primary="All"/>
-    //           </ListItem>
-    //         </List>
-    //         <Divider />
-    //         <List>
-    //           {Object.keys(categories).map(id =>(
-    //             <ListItem button key={categories[id].name} onClick={()=>this.handleFilter(categories[id].name)}>
-    //             <ListItemIcon><CategoryIcon /></ListItemIcon>
-    //             <ListItemText primary={categories[id].name} />
-    //           </ListItem>                  
-    //           ))}  
-
-    //         </List>
-    //       </Drawer>
-    //   </div>
-    // )
+        
   }
 
 }

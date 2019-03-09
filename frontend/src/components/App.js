@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import NavBar from './NavBar';
-import { handleReceiveCategories } from '../actions/categories'
+import { handleInitialData } from '../actions/shared'
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -17,7 +17,7 @@ import "../assets/scss/material-kit-react.scss?v=1.4.0";
 class App extends Component {
   
   componentDidMount(){
-      this.props.dispatch(handleReceiveCategories());
+    this.props.dispatch(handleInitialData());
 }
 
   render() {
