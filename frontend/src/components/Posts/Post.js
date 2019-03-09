@@ -18,67 +18,10 @@ import EditIcon from '@material-ui/icons/Edit';
 import Chip from '@material-ui/core/Chip';
 import Category from '@material-ui/icons/Category';
 
+import postStyle from "../../assets/jss/material-kit-react/views/post.jsx";
+import classNames from "classnames";
+import InfoArea from "../../components/InfoArea/InfoArea.jsx";
 
-const styles = theme => ({
-    root: {
-      ...theme.mixins.gutters(),
-      paddingTop: theme.spacing.unit * 2,
-      paddingBottom: theme.spacing.unit * 2,
-      width: '100%',
-    },
- 
-    title:{
-      width: '100%',
-      margin: 'auto'
-    },
-
-    body:{
-      width: '100%',
-      margin: 20
-    },    
-
-    category:{
-      margin: 10,
-    },
-
-    fab:{
-      margin: 10
-    },
-
-    form: {
-        display: 'flex',
-        flexWrap: 'wrap',
-      },    
-      textField: {
-        marginLeft: theme.spacing.unit,
-        marginRight: theme.spacing.unit,
-        // width: 400,
-      },
-      dense: {
-        marginTop: 19,
-      },
-      menu: {
-        width: 200,
-      },
-
-    button: {      
-      margin: 20
-    },
-    card: {
-        padding: 10
-    },
-    gridContainer:{
-        padding: 20
-    },
-    cardHeader: {
-        padding: 10,
-        margin: 5
-    },
-    typography: {
-        padding: 5
-    }
-
-  });
   
 
 export class Post extends Component {
@@ -104,61 +47,58 @@ export class Post extends Component {
     render() {
 
     const { classes, post, comments } = this.props;
-    console.log('comments:');
-    console.log(comments);
+    
+    return(
+      <div className={classNames(classes.main, classes.mainRaised)}>
+      <div className={classes.container}>
+      <div className={classes.section}>
+      <h2 className={classes.title}>{post.title} 
+      <Fab color="secondary" aria-label="Edit" className={classNames(classes.fab)}>
+           <EditIcon onClick={()=>{this.handleEdit()}}  />
+      </Fab>                   
+      </h2>
+      <h4 className={classes.description}>
+        {post.body}
+      </h4>
+      <h4>
+      <Avatar aria-label='SCORE' className={classNames(classes.avatar)}>
+         {post.voteScore}
+       </Avatar>          
+      <IconButton aria-label='Vote UP' onClick={()=>this.handleVoteUp(post.id)}>
+           <ThumbUp />
+       </IconButton>
+       <IconButton aria-label='Vote DOWN' onClick={()=>this.handleVoteDown(post.id)}>
+           <ThumbDown />
+       </IconButton>       
+      </h4>
+      <InfoArea
+                title={post.category}
+                description={`by ${post.author} : ${post.timestamp}`}
+                icon={Category}
+                iconColor="info"
+                vertical
+              />      
+
+        {post.commentCount > 0 && (
+          <h3 className={classes.description}>
+            Comments: {post.commentCount} 
+          </h3>  
+        )}              
+       <Grid container spacing={24} className={classes.gridContainer}>
+             {Object.keys(comments).map(id =>(
+                 <Grid key={id} item xs={12} sm={12} lg={12} xl={12}>                    
+                 <Comment comment={comments[id]} />
+
+             </Grid>
+             ))}
+         </Grid>       
+
+      </div>
+      </div>
+    </div>
+    )
 
     
-    return (
-      <div>
-      <Paper className={classes.root} elevation={1}>
-
-       <form className={classes.form} >
-       <Typography variant="h5" gutterBottom className={classes.title}>
-       <Chip label={post.category}  icon={<Category />}  color='secondary' className={classes.category} />
-        {post.title}
-        <Fab color="primary" aria-label="Edit" className={classes.fab}>
-          <EditIcon onClick={()=>{this.handleEdit()}} />
-        </Fab>                   
-      </Typography>  
-
-      <Typography variant="subtitle1" gutterBottom>
-        {post.author} : {post.timestamp}
-      </Typography>
-
-
-      <Typography variant="body1" gutterBottom className={classes.body}>
-        {post.body}
-      </Typography>
-
-      <Avatar aria-label='SCORE' className={classes.avatar}>
-        {post.voteScore}
-      </Avatar>    
-
-      <IconButton aria-label='Vote UP' onClick={()=>this.handleVoteUp(post.id)}>
-          <ThumbUp />
-      </IconButton>
-      <IconButton aria-label='Vote DOWN' onClick={()=>this.handleVoteDown(post.id)}>
-          <ThumbDown />
-      </IconButton>
-
-      {post.commentCount > 0 && (
-        <Typography variant="h5" gutterBottom className={classes.title}>
-          Comments: {post.commentCount} 
-        </Typography>  
-      )}
-      </form> 
-      </Paper>   
-      <Grid container spacing={24} className={classes.gridContainer}>
-            {Object.keys(comments).map(id =>(
-                <Grid key={id} item xs={12} sm={12} lg={12} xl={12}>                    
-                <Comment comment={comments[id]} />
-                <Divider variant="fullWidth" />
-
-            </Grid>
-            ))}
-        </Grid>       
-      </div>
-    )
   }
 }
 
@@ -168,4 +108,4 @@ function mapStateToProps( {comments}){
   }
 }
 
-export default withRouter(connect(mapStateToProps)(withStyles(styles)(Post)));
+export default withRouter(connect(mapStateToProps)(withStyles(postStyle)(Post)));
