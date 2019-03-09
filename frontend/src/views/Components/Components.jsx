@@ -35,7 +35,7 @@ class Components extends React.Component {
     const { classes, ...rest } = this.props;
     return (
       <div>
-        <Header
+        {/* <Header
           brand="Material Kit React"
           rightLinks={<HeaderLinks />}
           fixed
@@ -45,8 +45,8 @@ class Components extends React.Component {
             color: "white"
           }}
           {...rest}
-        />
-        <Parallax image={require("../../assets/img/bg4.jpg")}>
+        /> */}
+        {/* <Parallax image={require("../../assets/img/bg4.jpg")}>
           <div className={classes.container}>
             <GridContainer>
               <GridItem>
@@ -59,17 +59,17 @@ class Components extends React.Component {
               </GridItem>
             </GridContainer>
           </div>
-        </Parallax>
+        </Parallax> */}
 
         <div className={classNames(classes.main, classes.mainRaised)}>
           <SectionBasics />
-          <SectionNavbars />
-          <SectionTabs />
+          {/* <SectionNavbars /> */}
+          {/* <SectionTabs /> */}
           <SectionPills />
           <SectionNotifications />
           <SectionTypography />
           <SectionJavascript />
-          <SectionCarousel />
+          {/* <SectionCarousel /> */}
           <SectionCompletedExamples />
           <SectionLogin />
           <GridItem md={12} className={classes.textCenter}>
@@ -80,7 +80,7 @@ class Components extends React.Component {
             </Link>
           </GridItem>
           <SectionExamples />
-          <SectionDownload />
+          {/* <SectionDownload /> */}
         </div>
         <Footer />
       </div>
