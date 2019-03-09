@@ -30,7 +30,7 @@ import work3 from "../../assets/img/examples/cynthia-del-rio.jpg";
 import work4 from "../../assets/img/examples/mariya-georgieva.jpg";
 import work5 from "../../assets/img/examples/clem-onojegaw.jpg";
 
-import profilePageStyle from "assets/jss/material-kit-react/views/profilePage.jsx";
+import profilePageStyle from "../../assets/jss/material-kit-react/views/profilePage.jsx";
 
 class ProfilePage extends React.Component {
   render() {
@@ -54,7 +54,7 @@ class ProfilePage extends React.Component {
           }}
           {...rest}
         />
-        <Parallax small filter image={require("assets/img/profile-bg.jpg")} />
+        <Parallax small filter image={require("../../assets/img/profile-bg.jpg")} />
         <div className={classNames(classes.main, classes.mainRaised)}>
           <div>
             <div className={classes.container}>
