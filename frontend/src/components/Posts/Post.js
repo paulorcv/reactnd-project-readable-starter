@@ -9,16 +9,12 @@ import ThumbDown from '@material-ui/icons/ThumbDown';
 import { handleReceiveComments } from '../../actions/comments';
 import Comment from '../Comments/Comment';
 import Grid from '@material-ui/core/Grid';
-import Divider from '@material-ui/core/Divider';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import Fab from '@material-ui/core/Fab';
 import EditIcon from '@material-ui/icons/Edit';
-import Chip from '@material-ui/core/Chip';
 import Category from '@material-ui/icons/Category';
 
-import postStyle from "../../assets/jss/material-kit-react/views/post.jsx";
+import postStyle from "../../assets/jss/material-kit-react/views/postStyle.jsx";
 import classNames from "classnames";
 import InfoArea from "../../components/InfoArea/InfoArea.jsx";
 
@@ -80,7 +76,7 @@ export class Post extends Component {
               />      
 
         {post.commentCount > 0 && (
-          <h3 className={classes.description}>
+          <h3 className={classes.title}>
             Comments: {post.commentCount} 
           </h3>  
         )}              

@@ -1,10 +1,4 @@
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import CardActions from '@material-ui/core/CardActions';
 import IconButton from '@material-ui/core/IconButton';
 import ThumbUp from '@material-ui/icons/ThumbUp';
 import ThumbDown from '@material-ui/icons/ThumbDown';
@@ -12,25 +6,18 @@ import Avatar from '@material-ui/core/Avatar';
 import { handleVoteComment } from '../../actions/comments';
 import { connect } from 'react-redux';
 
-const styles = theme => ({
-    button: {      
-      margin: 20
-    },
-    card: {
-        padding: 10
-    },
-    gridContainer:{
-        padding: 20
-    },
-    cardHeader: {
-        padding: 10,
-        margin: 5
-    },
-    typography: {
-        padding: 5
-    }
 
-  });
+// @material-ui/core components
+import withStyles from "@material-ui/core/styles/withStyles";
+
+// @material-ui/icons
+
+// core components
+import Card from "../../components/Card/Card.jsx";
+import CardBody from "../../components/Card/CardBody.jsx";
+import CardFooter from "../../components/Card/CardFooter.jsx";
+
+import commentStyle from "../../assets/jss/material-kit-react/views/commentStyle.jsx";
 
 export class Comment extends Component {
   
@@ -47,6 +34,33 @@ export class Comment extends Component {
 
     const { comment , classes } = this.props;
 
+    return(
+        <Card plain>
+        <h4 className={classes.cardTitle}>
+          by {comment.author}
+          <br />
+          <small className={classes.smallTitle}>{comment.timestamp}</small>
+        </h4>
+        <CardBody>
+          <p className={classes.description}>
+           {comment.body}
+          </p>
+        </CardBody>
+        <CardFooter className={classes.justifyCenter}>
+           <Avatar aria-label='SCORE' className={classes.avatar}>
+                {comment.voteScore}
+            </Avatar>    
+            <IconButton aria-label='Vote UP' onClick={()=>this.handleVoteUp(comment.id)}>
+                <ThumbUp/>
+            </IconButton>
+            <IconButton aria-label='Vote DOWN' onClick={()=>this.handleVoteDown(comment.id)}>
+                <ThumbDown />
+            </IconButton>
+        </CardFooter>
+      </Card>        
+    )
+
+{/*
     return (
         <div>
         <Card classsName={classes.card} elevation={1}>
@@ -73,7 +87,8 @@ export class Comment extends Component {
                 </Card>         
       </div>
     )
+    */    }
   }
 }
 
-export default connect()(withStyles(styles)(Comment));
+export default connect()(withStyles(commentStyle)(Comment));
