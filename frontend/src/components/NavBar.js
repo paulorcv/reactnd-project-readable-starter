@@ -35,8 +35,7 @@ class NavBar extends Component {
   render(){
     const { categories } = this.props;
     const { classes } = this.props;   
-    console.log('===== categories ======');
-    console.log(categories); 
+
 
     return (
       <div className={classes.section}>

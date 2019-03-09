@@ -64,9 +64,9 @@ class LoginPage extends React.Component {
               <GridItem xs={12} sm={12} md={4}>
                 <Card className={classes[this.state.cardAnimaton]}>
                   <form className={classes.form}>
-                    <CardHeader color="primary" className={classes.cardHeader}>
+                    <CardHeader color="info" className={classes.cardHeader}>
                       <h4>Login</h4>
-                      <div className={classes.socialLine}>
+                      {/* <div className={classes.socialLine}>
                         <Button
                           justIcon
                           href="#pablo"
@@ -94,7 +94,7 @@ class LoginPage extends React.Component {
                         >
                           <i className={"fab fa-google-plus-g"} />
                         </Button>
-                      </div>
+                      </div> */}
                     </CardHeader>
                     <p className={classes.divider}>Or Be Classical</p>
                     <CardBody>

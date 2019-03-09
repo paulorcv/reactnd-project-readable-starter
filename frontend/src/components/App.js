@@ -32,7 +32,7 @@ class App extends Component {
             
             <Route path='/:category' exact component={PostsPage} />
             <Route path='/:category/:id' component={PostPage} />
-            <Route path="/components" component={Components} />
+            <Route path="/" exact component={Components} />
             <Route path="/landing-page" component={LandingPage} />
             <Route path="/profile-page" component={ProfilePage} />
             <Route path="/login-page" component={LoginPage} />

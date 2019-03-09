@@ -63,8 +63,8 @@ class Components extends React.Component {
 
         <div className={classNames(classes.main, classes.mainRaised)}>
           <SectionBasics />
-          {/* <SectionNavbars /> */}
-          {/* <SectionTabs /> */}
+          <SectionNavbars />
+          <SectionTabs />
           <SectionPills />
           <SectionNotifications />
           <SectionTypography />

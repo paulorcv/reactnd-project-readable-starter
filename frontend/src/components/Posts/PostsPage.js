@@ -1,40 +1,22 @@
 import React, { Component } from 'react'
-import Grid from '@material-ui/core/Grid';
+// import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
-import { withStyles } from '@material-ui/core/styles';
+// import { withStyles } from '@material-ui/core/styles';
 import { handleReceivePosts } from '../../actions/posts'
 import PostCard from './PostCard';
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
+// import Fab from '@material-ui/core/Fab';
+// import AddIcon from '@material-ui/icons/Add';
+// @material-ui/core components
+import withStyles from "@material-ui/core/styles/withStyles";
+// core components
+import GridContainer from "../../components/Grid/GridContainer.jsx";
+import GridItem from "../../components/Grid/GridItem.jsx";
 
 
+import postsPage from "../../assets/jss/material-kit-react/views/postsPage.jsx";
 
-const styles = theme => ({
-    fab:{
-      position: 'absolute',
-      bottom: theme.spacing.unit * 2,
-      right: theme.spacing.unit * 2,
-    },
-    button: {      
-      margin: 20
-    },
-    card: {
-        padding: 10
-    },
-    gridContainer:{
-        padding: 20
-    },
-    cardHeader: {
-        padding: 10,
-        margin: 5
-    },
-    typography: {
-        padding: 5
-    }
 
-  });
-  
 
 export class PostsPage extends Component {
 
@@ -49,25 +31,19 @@ export class PostsPage extends Component {
 
     render() {
     const { posts, classes, category}  = this.props;    
-    return (
-      <div>
-        <Grid container spacing={24} className={classes.gridContainer}>
+    
+    return(
+          <div className={classes.container}>
+            <GridContainer justify="center">
             {Object.keys(posts).map(id =>(
-                <Grid key={id} item xs={12} sm={12} lg={6} xl={6}>                    
+              <GridItem xs={12} sm={12} lg={6} md={6} xl={6}>
                 <PostCard post={posts[id]} />
-            </Grid>
-            ))}
-        </Grid>      
-        <Fab 
-          className={classes.fab} 
-          color="primary" 
-          aria-label="New Post" 
-          onClick={()=>this.handleNewPost(category)}>
-          <AddIcon />
-        </Fab>
-          
-      </div>
+              </GridItem>
+               ))}
+            </GridContainer>
+          </div>      
     )
+  
   }
 }
 
@@ -81,4 +57,4 @@ function mapStateToProps({posts}, props){
     }
   }
   
-  export default withRouter(connect(mapStateToProps)(withStyles(styles)(PostsPage)))
+  export default withRouter(connect(mapStateToProps)(withStyles(postsPage)(PostsPage)))
