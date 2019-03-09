@@ -9,10 +9,12 @@ import IconButton from '@material-ui/core/IconButton';
 import ThumbUp from '@material-ui/icons/ThumbUp';
 import ThumbDown from '@material-ui/icons/ThumbDown';
 import { handleReceiveComments } from '../../actions/comments';
-import Comment from '../Comment';
+import { handleReceivePosts } from '../../actions/posts';
+import Comment from '../Comments/Comment';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import Paper from '@material-ui/core/Paper';
+import { withRouter } from 'react-router';
 
 
 
@@ -61,14 +63,31 @@ const styles = theme => ({
 
 export class PostEdit extends Component {
 
-    state = {
-        toHome: false
-    };
-    
+  constructor(props){
+    super(props);
+    const { post } = props;
+    console.log("*constructor post:");
+    console.log(post);
+
+    this.state = { post,
+                  toHome: false
+                 }
+
+  }
   componentDidMount(){
-      const { post } = this.props;
-      this.setState(post)
-      this.props.dispatch(handleReceiveComments(post.id));
+      const { id } = this.props.match.params;
+      this.props.dispatch(handleReceiveComments(id));
+  }
+
+  componentDidUpdate(){
+    const { post } = this.props;
+     if(post.id && !this.state.id){
+       this.setState(post)
+       console.log('post have an id');
+     }
+    console.log("*componentDidUpdate post:");
+    console.log(post);
+
   }
 
   handleVoteUp(id){
@@ -94,13 +113,16 @@ export class PostEdit extends Component {
     }
     
     handleChange = name => event => {
-    this.setState({ [name]: event.target.value });
+    this.setState({ [name]: event.target.value, toHome: false });
     }
 
     render() {
 
     const { classes, category, post, comments } = this.props;
     const { toHome } = this.state;
+    
+    console.log('=====>post:');
+    console.log(post);
     
     if (toHome === true) {
         return <Redirect to={`/${category}`} />
@@ -213,10 +235,23 @@ export class PostEdit extends Component {
   }
 }
 
-function mapStateToProps( {comments}){
+function mapStateToProps( {comments, posts}, props){
+ 
+  const { id , category} = props.match.params;  
+ 
+  if(posts[id] === undefined){
+    return {
+      post: {},
+      comments,
+    }
+  }
+  const post = posts[id];
+
   return { 
-    comments
+    post,
+    comments,    
   }
 }
+  
 
-export default connect(mapStateToProps)(withStyles(styles)(PostEdit));
+export default withRouter(connect(mapStateToProps)(withStyles(styles)(PostEdit)));

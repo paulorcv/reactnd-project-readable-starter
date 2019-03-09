@@ -3,6 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import { handleReceivePosts } from '../../actions/posts'
 import Grid from '@material-ui/core/Grid';
+import PostEdit from './PostEdit';
 import Post from './Post';
 
 const styles = theme => ({
@@ -16,19 +17,24 @@ class PostPage extends Component {
 
   componentDidMount(){
     const { id, category } = this.props;
+
     id!== undefined && (
       this.props.dispatch(handleReceivePosts(category))
     );
   }
 
   render() {
-    const { classes, category, id, post }  = this.props;
-
+    const { classes, category, id, post , action}  = this.props;
+    
 return (
   <div>
       <Grid container spacing={24} className={classes.gridContainer}>
             <Grid key={id} item xs={12} sm={12} lg={12} xl={12}>                    
-              <Post post={post} category={category}/>
+              { action === "edit" ?  (
+                <PostEdit category={category}/>
+              ) : (
+                <Post post={post} category={category}/>
+              )}              
         </Grid>
       </Grid>     
   </div>

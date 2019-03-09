@@ -28,7 +28,8 @@ export class Post extends Component {
   }
 
   handleEdit(){
-    //todo: handle edit
+    const {id, category} = this.props.match.params;
+    this.props.history.push(`/${category}/${id}/edit`);
     console.log("edit");
   }
 
