@@ -16,6 +16,11 @@ import TextField from '@material-ui/core/TextField';
 import { handleReceiveComments, handleUpdateComment } from '../../actions/comments';
 import { withRouter } from 'react-router';
 import Button from "../../components/CustomButtons/Button.jsx";
+import SnackbarContent from "../../components/Snackbar/SnackbarContent.jsx";
+import Check from "@material-ui/icons/Check";
+
+
+
 
 
 export class CommentEdit extends Component {
@@ -23,7 +28,7 @@ export class CommentEdit extends Component {
   constructor(props){
     super(props);
     const { comment } = props;
-    this.state = { comment }
+    this.state = { comment: comment, showAlert: false }
   }
 
   componentDidMount(){
@@ -39,13 +44,14 @@ componentDidUpdate(){
 }
 
 handleSave = () => {
-  const comment = this.state;
+  const comment = this.state.comment;
   this.props.dispatch(handleUpdateComment(comment));
-  this.setState(() => ({  }))
+  this.setState({ comment: {}, showAlert: true});
+  setTimeout(()=>{ this.setState({ comment: {}, showAlert: false}) }, 3000);
 }
 
 handleChange = name => event => {
-this.setState({ [name]: event.target.value, toHome: false });
+this.setState({ comment: {[name]: event.target.value, toHome: false }});
 }
 
   handleDelete(id){
@@ -65,6 +71,8 @@ this.setState({ [name]: event.target.value, toHome: false });
 
     const { comment , classes } = this.props;
 
+    const { showAlert } = this.state;
+  
     return(
         <Card plain>
         <h4 className={classes.cardTitle}>
@@ -75,14 +83,27 @@ this.setState({ [name]: event.target.value, toHome: false });
 
         <TextField
           id="comment-body"
-          label="Body"
           className={classes.textField}
-          value={this.state.body}
+          value={this.state.comment.body}
           onChange={this.handleChange('body')}
           margin="normal"
           fullWidth      
           defaultValue=" "
         />
+        { showAlert === true && (
+              <SnackbarContent
+              message={
+                <span>
+                  <b>SAVED</b> 
+                </span>
+              }
+              close
+              color="success"
+              icon={Check}              
+            />
+        )}
+
+
         <CardFooter className={classes.justifyCenter}>
            <Avatar aria-label='SCORE' className={classes.avatar}>
                 {comment.voteScore}
