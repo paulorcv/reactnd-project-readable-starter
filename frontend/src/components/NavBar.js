@@ -13,6 +13,7 @@ import { withRouter } from 'react-router-dom'
 import Header from './Header/Header';
 import Button from "./CustomButtons/Button.jsx";
 import navbarStyle from '../assets/jss/material-kit-react/views/navbarStyle.jsx';
+import BookIcon from '@material-ui/icons/Book';
 
 class NavBar extends Component {
 
@@ -43,7 +44,9 @@ class NavBar extends Component {
             <Header
               brand="READABLE"
               color="primary"
-              
+              leftLinks={
+                <BookIcon className={classes.icon} />                
+              }
               rightLinks={
                 <List className={classes.list}>
                   <ListItem key='all' className={classes.listItem}>
@@ -69,6 +72,7 @@ class NavBar extends Component {
                   </ListItem>
                   ))} 
                 </List>
+                
               }
             />
         </div>
