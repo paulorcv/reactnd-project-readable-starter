@@ -10,7 +10,10 @@ import ThumbUp from '@material-ui/icons/ThumbUp';
 import ThumbDown from '@material-ui/icons/ThumbDown';
 import { handleReceiveComments } from '../../actions/comments';
 import Comment from '../Comments/Comment';
+import CommentEdit from '../Comments/CommentEdit';
+
 import Grid from '@material-ui/core/Grid';
+
 import { withRouter } from 'react-router';
 
 import postStyle from "../../assets/jss/material-kit-react/views/postStyle.jsx";
@@ -151,7 +154,7 @@ export class PostEdit extends Component {
        <Grid container spacing={24} className={classes.gridContainer}>
              {Object.keys(comments).map(id =>(
                  <Grid key={id} item xs={12} sm={12} lg={12} xl={12}>                    
-                 <Comment comment={comments[id]} />
+                 <CommentEdit comment={comments[id]} />
 
              </Grid>
              ))}

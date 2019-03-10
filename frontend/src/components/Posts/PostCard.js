@@ -1,9 +1,4 @@
 import React, { Component } from 'react'
-// import Card from '@material-ui/core/Card';
-// import CardHeader from '@material-ui/core/CardHeader';
-// import CardContent from '@material-ui/core/CardContent';
-// import Typography from '@material-ui/core/Typography';
-// import CardActions from '@material-ui/core/CardActions';
 import IconButton from '@material-ui/core/IconButton';
 import ThumbUp from '@material-ui/icons/ThumbUp';
 import ThumbDown from '@material-ui/icons/ThumbDown';
@@ -14,14 +9,10 @@ import Chip from '@material-ui/core/Chip';
 import Category from '@material-ui/icons/Category';
 import Face from '@material-ui/icons/Face';
 import { Link } from 'react-router-dom';
-// import Button from '@material-ui/core/Button';
-// import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import { handleVotePost } from '../../actions/posts';
 
-// @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
-// core components
 import Button from "../../components/CustomButtons/Button.jsx";
 import Card from "../../components/Card/Card.jsx";
 import CardBody from "../../components/Card/CardBody.jsx";
