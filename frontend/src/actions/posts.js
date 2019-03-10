@@ -1,11 +1,12 @@
 import { showLoading, hideLoading } from 'react-redux-loading';
 import convertPosts from '../util/postHelper';
-import {getPost, getPosts, getPostsByCategory, updatePost, votePost, createPost} from '../api/api';
+import {getPost, getPosts, getPostsByCategory, updatePost, votePost, createPost, deletePost} from '../api/api';
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
 export const SET_POSTS_FROM_CATEGORIES_FILTER = 'SET_POSTS_FROM_CATEGORIES_FILTER';
 export const RECEIVE_POST = 'RECEIVE_POST';
 export const UPDATE_POST = 'UPDATE_POST';
 export const CREATE_POST = 'CREATE_POST';
+export const DELETE_POST = 'DELETE_POST';
 
 
 export function handleVotePost(id, option){
@@ -49,6 +50,14 @@ export function receivePostAction(post){
 }
 
 
+export function deletePostAction(id){
+    return{
+        type: DELETE_POST,
+        id
+    }
+}
+
+
 export function setPostsFromCategoryFilterAction(filter){
     return{
         type : SET_POSTS_FROM_CATEGORIES_FILTER,
@@ -62,6 +71,17 @@ export function handleUpdatePost(post){
         return updatePost(post)
             .then((post)=> {
                 dispatch(updatePostAction(post));
+                dispatch(hideLoading());
+            }); 
+    }
+}
+
+export function handleDeletePost(postId){
+    return(dispatch) => {
+        dispatch(showLoading());
+        return deletePost(postId)
+            .then(()=> {
+                dispatch(deletePostAction(postId));
                 dispatch(hideLoading());
             }); 
     }

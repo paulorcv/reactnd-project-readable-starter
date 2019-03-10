@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 import Button from "../../components/CustomButtons/Button.jsx";
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { handleUpdatePost, handleVotePost } from '../../actions/posts'
+import { handleUpdatePost, handleVotePost, handleDeletePost } from '../../actions/posts'
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom'
 import IconButton from '@material-ui/core/IconButton';
 import ThumbUp from '@material-ui/icons/ThumbUp';
 import ThumbDown from '@material-ui/icons/ThumbDown';
 import { handleReceiveComments } from '../../actions/comments';
-import Comment from '../Comments/Comment';
+import DeleteIcon from '@material-ui/icons/Delete';
 import CommentEdit from '../Comments/CommentEdit';
 
 import Grid from '@material-ui/core/Grid';
@@ -21,6 +21,8 @@ import classNames from "classnames";
 import Avatar from '@material-ui/core/Avatar';
 import InfoArea from "../../components/InfoArea/InfoArea.jsx";
 import Category from '@material-ui/icons/Category';
+import Fab from '@material-ui/core/Fab';
+
 
 export class PostEdit extends Component {
 
@@ -42,6 +44,12 @@ export class PostEdit extends Component {
      if(post.id && !this.state.id){
        this.setState(post)
      }
+  }
+
+  handleDelete(postId){
+    this.props.dispatch(handleDeletePost(postId));
+    const {category} = this.props.match.params;
+    this.props.history.push(`/${category}`);
   }
 
   handleVoteUp(id){
@@ -145,6 +153,9 @@ export class PostEdit extends Component {
       >
         SAVE
       </Button>
+      <Fab color="info" aria-label="Delete" className={classNames(classes.fab)} onClick={()=>{this.handleDelete(post.id)}}>
+           <DeleteIcon   />
+      </Fab>          
     
         {post.commentCount > 0 && (
           <h3 className={classes.title}>

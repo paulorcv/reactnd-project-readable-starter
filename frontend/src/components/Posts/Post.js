@@ -1,7 +1,7 @@
 import { withRouter } from 'react-router-dom';
 import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles';
-import { handleVotePost } from '../../actions/posts'
+import { handleVotePost , handleDeletePost} from '../../actions/posts'
 import { connect } from 'react-redux';
 import IconButton from '@material-ui/core/IconButton';
 import ThumbUp from '@material-ui/icons/ThumbUp';
@@ -13,6 +13,8 @@ import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
 import Fab from '@material-ui/core/Fab';
 import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+
 import Category from '@material-ui/icons/Category';
 
 import postStyle from "../../assets/jss/material-kit-react/views/postStyle.jsx";
@@ -31,6 +33,12 @@ export class Post extends Component {
   handleEdit(){
     const {id, category} = this.props.match.params;
     this.props.history.push(`/${category}/${id}/edit`);
+  }
+
+  handleDelete(postId){
+    this.props.dispatch(handleDeletePost(postId));
+    const {category} = this.props.match.params;
+    this.props.history.push(`/${category}`);
   }
 
   handleVoteUp(id){
@@ -52,7 +60,10 @@ export class Post extends Component {
       <h2 className={classes.title}>{post.title} 
       <Fab color="secondary" aria-label="Edit" className={classNames(classes.fab)} onClick={()=>{this.handleEdit()}}>
            <EditIcon   />
-      </Fab>                   
+      </Fab>  
+      <Fab color="info" aria-label="Delete" className={classNames(classes.fab)} onClick={()=>{this.handleDelete(post.id)}}>
+           <DeleteIcon   />
+      </Fab>                           
       </h2>
       <h4 className={classes.description}>
         {post.body}
@@ -107,7 +118,7 @@ export class Post extends Component {
 
 function mapStateToProps( {comments}){
   return { 
-    comments
+    comments,
   }
 }
 

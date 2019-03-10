@@ -1,4 +1,4 @@
-import { RECEIVE_POSTS, SET_POSTS_FROM_CATEGORIES_FILTER, UPDATE_POST, CREATE_POST } from '../actions/posts';
+import { RECEIVE_POSTS, SET_POSTS_FROM_CATEGORIES_FILTER, UPDATE_POST, CREATE_POST, DELETE_POST } from '../actions/posts';
 
 export default function posts( state={}, action){
     switch(action.type){
@@ -9,6 +9,34 @@ export default function posts( state={}, action){
                 [action.post.id] : action.post
             } 
 
+            case DELETE_POST:            
+
+            const indexPostsFilterDelete = Object.keys(state).filter(id => state[id].id !== action.id);
+            let postsFilteredDelete = {};
+
+            console.log('========== REDUCER ==========')
+            console.log('before:');
+            console.log(state);
+            console.log('action.id:');
+            console.log(action.id);            
+            console.log('indexPostsFilterDelete:');
+            console.log(indexPostsFilterDelete);
+
+            indexPostsFilterDelete.map( (index)=>{
+                return postsFilteredDelete = {
+                    ...postsFilteredDelete,
+                    [index] : {
+                        ...state[index]
+                    }
+                }
+            });
+            
+            console.log('after:');
+            console.log(postsFilteredDelete);
+            
+            return postsFilteredDelete;              
+
+       
             case CREATE_POST:            
             return{
                 ...state,

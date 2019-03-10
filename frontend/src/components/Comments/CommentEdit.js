@@ -4,11 +4,10 @@ import ThumbUp from '@material-ui/icons/ThumbUp';
 import ThumbDown from '@material-ui/icons/ThumbDown';
 import Delete from '@material-ui/icons/Delete';
 import Avatar from '@material-ui/core/Avatar';
-import { handleVoteComment } from '../../actions/comments';
+import { handleVoteComment, handleDeleteComment } from '../../actions/comments';
 import { connect } from 'react-redux';
 import withStyles from "@material-ui/core/styles/withStyles";
 import Card from "../../components/Card/Card.jsx";
-import CardBody from "../../components/Card/CardBody.jsx";
 import CardFooter from "../../components/Card/CardFooter.jsx";
 import commentStyle from "../../assets/jss/material-kit-react/views/commentStyle.jsx";
 import moment from 'moment';
@@ -61,9 +60,8 @@ handleChange = name => event => {
   }
   
 
-  handleDelete(id){
-    //this.props.dispatch(handleVoteComment(id, 'upVote'));
-    console.log('delete');
+  handleDelete(commentId){
+      this.props.dispatch(handleDeleteComment(commentId));      
 }  
   
     handleVoteUp(id){

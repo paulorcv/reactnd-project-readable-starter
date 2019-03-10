@@ -1,10 +1,20 @@
 import { showLoading, hideLoading } from 'react-redux-loading';
-import { voteComment, updateComment, createComment } from '../api/api';
+import { voteComment, updateComment, createComment, deleteComment } from '../api/api';
 import {getComments} from '../api/api';
 import convertComments from '../util/commentHelper';
 export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS';
 export const UPDATE_COMMENT = 'UPDATE_COMMENT';
 export const CREATE_COMMENT = 'CREATE_COMMENT';
+export const DELETE_COMMENT = 'DELETE_COMMENT';
+
+
+export function deleteCommentAction(id){
+  return{
+      type: DELETE_COMMENT,
+      id
+  }
+}
+
 
 export function createCommentAction(comment){
   return{
@@ -70,6 +80,17 @@ export function handleCreateComment(comment){
       return createComment(comment)
           .then((post)=> {
               dispatch(createCommentAction(comment));
+              dispatch(hideLoading());
+          }); 
+  }
+}
+
+export function handleDeleteComment(commentId){
+  return(dispatch) => {
+      dispatch(showLoading());
+      return deleteComment(commentId)
+          .then(()=> {
+              dispatch(deleteCommentAction(commentId));
               dispatch(hideLoading());
           }); 
   }
