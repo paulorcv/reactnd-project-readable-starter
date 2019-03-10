@@ -75,7 +75,7 @@ this.setState({ [name]: event.target.value, toHome: false });
 
         <TextField
           id="comment-body"
-          label="Author"
+          label="Body"
           className={classes.textField}
           value={this.state.body}
           onChange={this.handleChange('body')}
@@ -96,7 +96,7 @@ this.setState({ [name]: event.target.value, toHome: false });
             <IconButton aria-label='Delete' onClick={()=>this.handleDelete(comment.id)}>
                 <Delete />
             </IconButton>    
-            <Button size="lg" color="primary" className={classes.button}
+            <Button size="sm" color="primary" className={classes.button}
               onClick={()=>this.handleSave()}>
               SAVE
             </Button>                    
