@@ -102,7 +102,17 @@ export const createComment = comment => fetch(`${api}/comments`, {
     ...headers,
     'Content-Type': 'application/json',
   },
-  body: JSON.stringify(comment),
+  // body: JSON.stringify(comment),
+  body: JSON.stringify({
+    id: generateKey(),
+    parentId: comment.parentId,
+    timestamp: generateTimestamp(),
+    body: comment.body,
+    author: comment.author,
+    voteScore: 0,
+    deleted: false,
+    parentDeleted: false 
+  })
 }).then(res => res.json());
 
 export const updateComment = comment => fetch(`${api}/comments/${comment.id}`, {

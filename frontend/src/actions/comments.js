@@ -1,9 +1,17 @@
 import { showLoading, hideLoading } from 'react-redux-loading';
-import { voteComment, updateComment } from '../api/api';
+import { voteComment, updateComment, createComment } from '../api/api';
 import {getComments} from '../api/api';
 import convertComments from '../util/commentHelper';
 export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS';
 export const UPDATE_COMMENT = 'UPDATE_COMMENT';
+export const CREATE_COMMENT = 'CREATE_COMMENT';
+
+export function createCommentAction(comment){
+  return{
+      type: CREATE_COMMENT,
+      comment
+  }
+}
 
 export function updateCommentAction(comment){
   return{
@@ -56,4 +64,13 @@ export function handleUpdateComment(comment){
   }
 }
 
-
+export function handleCreateComment(comment){
+  return(dispatch) => {
+      dispatch(showLoading());
+      return createComment(comment)
+          .then((post)=> {
+              dispatch(createCommentAction(comment));
+              dispatch(hideLoading());
+          }); 
+  }
+}

@@ -43,8 +43,8 @@ export class PostsPage extends Component {
                ))}
             </GridContainer>
           </div>      
-          <Fab color="secondary" className={classes.fab}>
-            <AddIcon onClick={()=>{this.handleNew(category)}} />
+          <Fab color="secondary" className={classes.fab} onClick={()=>{this.handleNew(category)}}>
+            <AddIcon  />
           </Fab>             
           </div>
     )

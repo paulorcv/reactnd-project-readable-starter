@@ -56,4 +56,11 @@ export class Comment extends Component {
   }
 }
 
-export default connect()(withStyles(commentStyle)(Comment));
+function mapStateToProps( {comments}){
+  return { 
+    comments
+  }
+}
+
+
+export default connect(mapStateToProps)(withStyles(commentStyle)(Comment));

@@ -8,6 +8,7 @@ import ThumbUp from '@material-ui/icons/ThumbUp';
 import ThumbDown from '@material-ui/icons/ThumbDown';
 import { handleReceiveComments } from '../../actions/comments';
 import Comment from '../Comments/Comment';
+import CommentNew from '../Comments/CommentNew';
 import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
 import Fab from '@material-ui/core/Fab';
@@ -49,8 +50,8 @@ export class Post extends Component {
       <div className={classes.container}>
       <div className={classes.section}>
       <h2 className={classes.title}>{post.title} 
-      <Fab color="secondary" aria-label="Edit" className={classNames(classes.fab)}>
-           <EditIcon onClick={()=>{this.handleEdit()}}  />
+      <Fab color="secondary" aria-label="Edit" className={classNames(classes.fab)} onClick={()=>{this.handleEdit()}}>
+           <EditIcon   />
       </Fab>                   
       </h2>
       <h4 className={classes.description}>
@@ -88,6 +89,12 @@ export class Post extends Component {
              </Grid>
              ))}
          </Grid>       
+
+         <Grid container spacing={24} className={classes.gridContainer}>             
+                 <Grid key='new-comment' item xs={12} sm={12} lg={12} xl={12}>                    
+                 <CommentNew postId={post.id} />
+             </Grid>
+         </Grid>                
 
       </div>
       </div>
