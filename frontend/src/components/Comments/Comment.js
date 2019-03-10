@@ -60,34 +60,6 @@ export class Comment extends Component {
       </Card>        
     )
 
-{/*
-    return (
-        <div>
-        <Card classsName={classes.card} elevation={1}>
-                <CardHeader 
-                    title={comment.author}
-                    subheader={comment.timestamp}
-                    className={classes.cardHeader} />                       
-                    <CardContent>
-                        <Typography component="p" className={classes.typography}>
-                            {comment.body}
-                        </Typography>
-                    </CardContent>    
-                    <CardActions>
-                        <Avatar aria-label='SCORE' className={classes.avatar}>
-                            {comment.voteScore}
-                        </Avatar>    
-                        <IconButton aria-label='Vote UP' onClick={()=>this.handleVoteUp(comment.id)}>
-                            <ThumbUp />
-                        </IconButton>
-                        <IconButton aria-label='Vote DOWN' onClick={()=>this.handleVoteDown(comment.id)}>
-                            <ThumbDown />
-                        </IconButton>
-                    </CardActions>                    
-                </Card>         
-      </div>
-    )
-    */    }
   }
 }
 

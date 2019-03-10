@@ -44,6 +44,12 @@ const postPageStyle = {
   },
    inputIconsColor: {
     color: "#495057"
+  },
+
+  fab:{
+    position: 'absolute',
+    bottom: "30px",
+    right: "30px",    
   }
 };
 

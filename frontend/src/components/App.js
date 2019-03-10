@@ -14,8 +14,7 @@ import ProfilePage from '../views/ProfilePage/ProfilePage.jsx';
 import "../assets/scss/material-kit-react.scss?v=1.4.0";
 
 
-class App extends Component {
-  
+class App extends Component {  
   componentDidMount(){
     this.props.dispatch(handleInitialData());
 }
@@ -33,6 +32,7 @@ class App extends Component {
             <Route path='/:category' exact component={PostsPage} />
             <Route path='/:category/:id/edit' exact render={(props) => <PostPage {...props} action="edit" />} />
             <Route path='/:category/:id' exact render={(props) => <PostPage {...props} action="view" />} />
+            <Route path='/:category/posts/new' exact render={(props) => <PostPage {...props} action="new" />} />
             <Route path="/" exact component={Components} />
             <Route path="/landing-page" component={LandingPage} />
             <Route path="/profile-page" component={ProfilePage} />

@@ -5,8 +5,8 @@ import { withRouter } from 'react-router-dom';
 // import { withStyles } from '@material-ui/core/styles';
 import { handleReceivePosts } from '../../actions/posts'
 import PostCard from './PostCard';
-// import Fab from '@material-ui/core/Fab';
-// import AddIcon from '@material-ui/icons/Add';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 // core components
@@ -20,8 +20,8 @@ import postsPage from "../../assets/jss/material-kit-react/views/postsPage.jsx";
 
 export class PostsPage extends Component {
 
-    handleNewPost(category){
-      this.props.history.push(`/${category}/new`);
+    handleNew(category){
+      this.props.history.push(`/${category}/posts/new`);
     }
 
     componentDidMount(){
@@ -33,6 +33,7 @@ export class PostsPage extends Component {
     const { posts, classes, category}  = this.props;    
     
     return(
+          <div>
           <div className={classes.container}>
             <GridContainer justify="center">
             {Object.keys(posts).map(id =>(
@@ -42,6 +43,10 @@ export class PostsPage extends Component {
                ))}
             </GridContainer>
           </div>      
+          <Fab color="secondary" className={classes.fab}>
+            <AddIcon onClick={()=>{this.handleNew(category)}} />
+          </Fab>             
+          </div>
     )
   
   }

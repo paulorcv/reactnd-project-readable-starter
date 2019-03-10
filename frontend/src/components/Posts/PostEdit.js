@@ -11,58 +11,13 @@ import ThumbDown from '@material-ui/icons/ThumbDown';
 import { handleReceiveComments } from '../../actions/comments';
 import Comment from '../Comments/Comment';
 import Grid from '@material-ui/core/Grid';
-import Divider from '@material-ui/core/Divider';
 import { withRouter } from 'react-router';
 
 import postStyle from "../../assets/jss/material-kit-react/views/postStyle.jsx";
 import classNames from "classnames";
-import CustomInput from "../../components/CustomInput/CustomInput.jsx";
 import Avatar from '@material-ui/core/Avatar';
 import InfoArea from "../../components/InfoArea/InfoArea.jsx";
 import Category from '@material-ui/icons/Category';
-
-const styles = theme => ({
-    root: {
-      ...theme.mixins.gutters(),
-      paddingTop: theme.spacing.unit * 2,
-      paddingBottom: theme.spacing.unit * 2,
-    },
-
-    form: {
-        display: 'flex',
-        flexWrap: 'wrap',
-      },    
-      textField: {
-        marginLeft: theme.spacing.unit,
-        marginRight: theme.spacing.unit,
-        // width: 400,
-      },
-      dense: {
-        marginTop: 19,
-      },
-      menu: {
-        width: 200,
-      },
-
-    button: {      
-      margin: 20
-    },
-    card: {
-        padding: 10
-    },
-    gridContainer:{
-        padding: 20
-    },
-    cardHeader: {
-        padding: 10,
-        margin: 5
-    },
-    typography: {
-        padding: 5
-    }
-
-  });
-  
 
 export class PostEdit extends Component {
 
@@ -127,17 +82,6 @@ export class PostEdit extends Component {
       <div className={classes.section}>
 
        <form className={classes.form} >
-       <CustomInput
-                  id="post-title"
-                  inputProps={{
-                    placeholder: "Title",
-                    value:this.state.title,
-                  }}
-                  formControlProps={{
-                    fullWidth: true,
-                    onChange:this.handleChange('title')
-                  }}
-                />
 
        <TextField
           id="post-title"
@@ -172,7 +116,7 @@ export class PostEdit extends Component {
 
       <TextField
           id="post-author"
-          label="Title"
+          label="Author"
           className={classes.textField}
           value={this.state.author}
           onChange={this.handleChange('author')}
@@ -222,7 +166,7 @@ export class PostEdit extends Component {
 
 function mapStateToProps( {comments, posts}, props){
  
-  const { id , category} = props.match.params;  
+  const { id} = props.match.params;  
  
   if(posts[id] === undefined){
     return {
