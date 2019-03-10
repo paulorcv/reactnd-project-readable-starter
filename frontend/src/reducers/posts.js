@@ -17,7 +17,6 @@ export default function posts( state={}, action){
  
         case RECEIVE_POSTS:
             return{
-                ...state,
                 ...action.posts
             }
             case SET_POSTS_FROM_CATEGORIES_FILTER:

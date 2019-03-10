@@ -3,7 +3,17 @@ const api = 'http://localhost:3001';
 // Generate a unique token for storing your bookshelf data on the backend server.
 let token = localStorage.token
 if (!token)
-  token = localStorage.token = Math.random().toString(36).substr(-8)
+  token = localStorage.token = generateKey()
+  //token = localStorage.token = Math.random().toString(36).substr(-8)
+
+function generateKey(){
+  return Math.random().toString(36).substr(-8)
+}
+
+function generateTimestamp(){
+  let dateTime = new Date().getTime();
+  return dateTime;
+}
 
 const headers = {
   'Accept': 'application/json',
@@ -54,7 +64,18 @@ export const createPost = post => fetch(`${api}/posts`, {
     ...headers,
     'Content-Type': 'application/json',
   },
-  body: JSON.stringify(post),
+  // body: JSON.stringify(post),
+  body: JSON.stringify({
+    id: generateKey(),
+    timestamp: generateTimestamp(),
+    title: post.title,
+    body: post.body,
+    author: post.author,
+    category: post.category,
+    voteScore: 0,
+    deleted: false,
+    commentCount: 0 
+  })
 }).then(res => res.json());
 
 export const deletePost = postId => fetch(`${api}/posts/${postId}`, { method: 'DELETE', headers })

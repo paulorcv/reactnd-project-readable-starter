@@ -17,7 +17,7 @@ import Category from '@material-ui/icons/Category';
 import postStyle from "../../assets/jss/material-kit-react/views/postStyle.jsx";
 import classNames from "classnames";
 import InfoArea from "../../components/InfoArea/InfoArea.jsx";
-
+import moment from 'moment';
   
 
 export class Post extends Component {
@@ -30,7 +30,6 @@ export class Post extends Component {
   handleEdit(){
     const {id, category} = this.props.match.params;
     this.props.history.push(`/${category}/${id}/edit`);
-    console.log("edit");
   }
 
   handleVoteUp(id){
@@ -70,7 +69,7 @@ export class Post extends Component {
       </h4>
       <InfoArea
                 title={post.category}
-                description={`by ${post.author} : ${post.timestamp}`}
+                description={`by ${post.author} : ${moment(post.timestamp).format('DD/MM/YYYY')}`}
                 icon={Category}
                 iconColor="info"
                 vertical
