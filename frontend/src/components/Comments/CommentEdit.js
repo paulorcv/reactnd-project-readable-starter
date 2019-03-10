@@ -72,6 +72,14 @@ handleChange = name => event => {
         this.props.dispatch(handleVoteComment(id, 'downVote'));
     }  
 
+
+    isCommentIncomplete = () => {
+      const { comment  } = this.state;
+    
+      return  comment.body === undefined || comment.body.trim() === '' ;
+          
+    }  
+
     render() {
 
     const { comment , classes } = this.props;
@@ -123,7 +131,7 @@ handleChange = name => event => {
                 <Delete />
             </IconButton>    
             <Button size="sm" color="primary" className={classes.button}
-              onClick={()=>this.handleSave()}>
+              onClick={()=>this.handleSave()} disabled={this.isCommentIncomplete()}>
               SAVE
             </Button>                    
         </CardFooter>

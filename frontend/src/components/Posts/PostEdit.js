@@ -78,6 +78,14 @@ export class PostEdit extends Component {
     this.setState({ [name]: event.target.value, toHome: false });
     }
 
+    isPostIncomplete = () => {
+      const { author, body, title } = this.state;
+
+      return author === undefined ||  body === undefined || title === undefined ||
+               author.trim() === '' || body.trim() === '' || title.trim() === '';
+          
+    }    
+
     render() {
 
     const { classes, category, post, comments } = this.props;
@@ -150,7 +158,7 @@ export class PostEdit extends Component {
 
       <Button size="lg" color="primary" className={classes.button}
         onClick={()=>this.handleSave()}
-      >
+        disabled={this.isPostIncomplete()}>
         SAVE
       </Button>
       <Fab color="info" aria-label="Delete" className={classNames(classes.fab)} onClick={()=>{this.handleDelete(post.id)}}>

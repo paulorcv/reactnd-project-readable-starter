@@ -34,6 +34,14 @@ export class PostNew extends Component {
     this.setState({ [name]: event.target.value, toHome: false });
     }
 
+    isPostIncomplete = () => {
+      const { author, category, body, title } = this.state;
+
+      return author === undefined || category===undefined || body === undefined || title === undefined ||
+               author.trim() === '' || category.trim() === '' || body.trim() === '' || title.trim() === '';
+          
+    }    
+
     render() {
 
     const { classes, category, categories } = this.props;
@@ -110,6 +118,7 @@ export class PostNew extends Component {
 
       <Button size="lg" color="primary" className={classes.button}
         onClick={()=>this.handleSave()}
+        disabled={this.isPostIncomplete()}
       >
         SAVE
       </Button>

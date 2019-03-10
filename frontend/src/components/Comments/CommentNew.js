@@ -42,6 +42,14 @@ this.setState({ comment });
 // console.log(this.state);
 }
 
+isCommentIncomplete = () => {
+  const { comment  } = this.state;
+
+  return  comment.author === undefined ||  comment.body === undefined || 
+          comment.author.trim() === '' || comment.body.trim() === '' ;
+      
+}    
+
 
     render() {
 
@@ -87,7 +95,7 @@ this.setState({ comment });
 
         <CardFooter className={classes.justifyCenter}>
             <Button size="sm" color="primary" className={classes.button}
-              onClick={()=>this.handleSave()}>
+              onClick={()=>this.handleSave()} disabled={this.isCommentIncomplete()}>
               SAVE
             </Button>                    
         </CardFooter>
