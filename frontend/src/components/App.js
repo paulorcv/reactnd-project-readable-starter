@@ -7,10 +7,6 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import PostPage from '../components/Posts/PostPage';
 import PostsPage from '../components/Posts/PostsPage'
 import LoadingBar from 'react-redux-loading'
-import Components from '../views/Components/Components.jsx';
-import LandingPage from '../views/LandingPage/LandingPage';
-import LoginPage from '../views/LoginPage/LoginPage.jsx';
-import ProfilePage from '../views/ProfilePage/ProfilePage.jsx';
 import "../assets/scss/material-kit-react.scss?v=1.4.0";
 
 
@@ -34,10 +30,6 @@ class App extends Component {
             <Route path='/:category/:id' exact render={(props) => <PostPage {...props} action="view" />} />
             <Route path='/:category/posts/new' exact render={(props) => <PostPage {...props} action="new" />} />
             <Route path="/" exact component={PostsPage} />
-            <Route path="/landing-page" component={LandingPage} />
-            <Route path="/profile-page" component={ProfilePage} />
-            <Route path="/login-page" component={LoginPage} />
-
           </div>}
 
         </React.Fragment>
