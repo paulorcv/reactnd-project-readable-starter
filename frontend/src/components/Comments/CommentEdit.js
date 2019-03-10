@@ -50,9 +50,16 @@ handleSave = () => {
   setTimeout(()=>{ this.setState({ comment: {}, showAlert: false}) }, 3000);
 }
 
+// handleChange = name => event => {
+// this.setState({ comment: {[name]: event.target.value, toHome: false }});
+// }
+
 handleChange = name => event => {
-this.setState({ comment: {[name]: event.target.value, toHome: false }});
-}
+  const { comment } = this.state;
+  comment[name] = event.target.value;
+  this.setState({ comment, toHome: false });  
+  }
+  
 
   handleDelete(id){
     //this.props.dispatch(handleVoteComment(id, 'upVote'));
