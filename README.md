@@ -1,22 +1,38 @@
-# Readable API Server
+# Readable
 
-This is the starter project for the final assessment project for Udacity's Redux course where you will build a content and comment web app. Users will be able to post content to predefined categories, comment on their posts and other users' posts, and vote on posts and comments. Users will also be able to edit and delete posts and comments.
+:books: Readable is my project for the Udacity  React Nanodegree program.
 
-This repository includes the code for the backend API Server that you'll use to develop and interact with the front-end portion of the project.
 
-## Start Developing
+## Instalation
 
-To get started developing right away:
+Clone the repository to a folder and execute the following command:
 
-* Install and start the API server
+```shellscript
+git clone https://github.com/paulorcv/reactnd-project-readable-starter.git
+
+
+## Instalation
+
+* API server
     - `cd api-server`
     - `npm install`
     - `node server`
-* In another terminal window, use Create React App to scaffold out the front-end
-    - `create-react-app frontend`
+* Frontend 
     - `cd frontend`
+    - `npm install`
     - `npm start`
 
-## API Server
+## Libraries Used
 
-Information about the API server and how to use it can be found in its [README file](api-server/README.md).
+- [Material UI](https://material-ui.com)
+- [react-time-ago](https://www.npmjs.com/package/react-time-ago)
+- React Redux, Redux Thunk, and a lot of react stuff
+
+
+## License
+
+MIT © 2019
+
+## Build tool
+
+This project was created using the [Create React App](https://github.com/facebookincubator/create-react-app).
