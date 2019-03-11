@@ -57,7 +57,10 @@ export class PostCard extends Component {
 
     handleEdit(postId, postCategory) {
         let { category } = this.props.match.params;
-        if( category.trim()!== "all") category = postCategory;
+
+        if( category===undefined) category = "all";
+
+        if(category.trim()!== "all") category = postCategory;
         this.props.history.push(`/${category}/${postId}/edit`);
     }
 
