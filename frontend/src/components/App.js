@@ -6,6 +6,7 @@ import { Route } from 'react-router-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import PostPage from '../components/Posts/PostPage';
 import PostsPage from '../components/Posts/PostsPage'
+import PostNotFound from '../components/Posts/PostNotFound';
 import LoadingBar from 'react-redux-loading'
 import "../assets/scss/material-kit-react.scss?v=1.4.0";
 
@@ -26,8 +27,9 @@ class App extends Component {
               : <div>          
             
             <Route path='/:category' exact component={PostsPage} />
+            <Route path='/:category/:id/notfound' exact component={PostNotFound} />
             <Route path='/:category/:id/edit' exact render={(props) => <PostPage {...props} action="edit" />} />
-            <Route path='/:category/:id' exact render={(props) => <PostPage {...props} action="view" />} />
+            <Route path='/:category/:id' exact render={(props) => <PostPage {...props} action="view" />} />            
             <Route path='/:category/posts/new' exact render={(props) => <PostPage {...props} action="new" />} />
             <Route path="/" exact component={PostsPage} />
           </div>}

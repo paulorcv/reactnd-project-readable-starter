@@ -47,9 +47,9 @@ export class PostNew extends Component {
     const { classes, category, categories } = this.props;
     const { toHome } = this.state;
     
-    if (toHome === true) {
-        return <Redirect to={`/${category}`} />
-    }
+      if (toHome === true) {
+          return <Redirect to={`/${category}`} />
+      }
 
     return (
       <div className={classNames(classes.main, classes.mainRaised)}>
