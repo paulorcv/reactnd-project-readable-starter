@@ -9,18 +9,23 @@ Clone the repository to a folder and execute the following command:
 
 ```shellscript
 git clone https://github.com/paulorcv/reactnd-project-readable-starter.git
+````
 
 
 ## Instalation
 
 * API server
+```shellscript
     - `cd api-server`
     - `npm install`
     - `node server`
+````    
 * Frontend 
+```shellscript
     - `cd frontend`
     - `npm install`
     - `npm start`
+````    
 
 ## Libraries Used
 
