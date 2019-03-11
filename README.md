@@ -1,6 +1,6 @@
 # Readable
 
-:books: Readable is my project for the Udacity  React Nanodegree program.
+:books: Readable is my second project for the Udacity  React Nanodegree program.
 
 
 ## Instalation
@@ -16,15 +16,15 @@ git clone https://github.com/paulorcv/reactnd-project-readable-starter.git
 
 * API server
 ```shellscript
-    - `cd api-server`
-    - `npm install`
-    - `node server`
+    - cd api-server
+    - npm install
+    - node server
 ````    
 * Frontend 
 ```shellscript
-    - `cd frontend`
-    - `npm install`
-    - `npm start`
+    - cd frontend
+    - npm install
+    - npm start
 ````    
 
 ## Libraries Used
