@@ -165,11 +165,7 @@ export class PostEdit extends Component {
            <DeleteIcon   />
       </Fab>          
     
-        {post.commentCount > 0 && (
-          <h3 className={classes.title}>
-            Comments: {post.commentCount} 
-          </h3>  
-        )}              
+            
        <Grid container spacing={24} className={classes.gridContainer}>
              {Object.keys(comments).map(id =>(
                  <Grid key={id} item xs={12} sm={12} lg={12} xl={12}>                    

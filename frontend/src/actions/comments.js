@@ -2,6 +2,8 @@ import { showLoading, hideLoading } from 'react-redux-loading';
 import { voteComment, updateComment, createComment, deleteComment } from '../api/api';
 import {getComments} from '../api/api';
 import convertComments from '../util/commentHelper';
+import { handleReceivePost } from '../actions/posts';
+
 export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS';
 export const UPDATE_COMMENT = 'UPDATE_COMMENT';
 export const CREATE_COMMENT = 'CREATE_COMMENT';
@@ -69,6 +71,7 @@ export function handleUpdateComment(comment){
       return updateComment(comment)
           .then((comment)=> {
               dispatch(updateCommentAction(comment));
+              dispatch(handleReceivePost(comment.parentId))
               dispatch(hideLoading());
           }); 
   }
@@ -80,6 +83,7 @@ export function handleCreateComment(comment){
       return createComment(comment)
           .then((post)=> {
               dispatch(createCommentAction(comment));
+              dispatch(handleReceivePost(comment.parentId))
               dispatch(hideLoading());
           }); 
   }
