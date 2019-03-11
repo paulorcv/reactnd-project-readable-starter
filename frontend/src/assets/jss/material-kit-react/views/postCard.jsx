@@ -45,6 +45,9 @@ const postCardStyle = {
   },
   inputIconsColor: {
     color: "#495057"
+  },
+  fab:{
+    margin: "2px",    
   }
 };
 

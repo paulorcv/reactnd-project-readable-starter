@@ -10,7 +10,7 @@ import Category from '@material-ui/icons/Category';
 import Face from '@material-ui/icons/Face';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { handleVotePost } from '../../actions/posts';
+import { handleVotePost, handleDeletePost } from '../../actions/posts';
 
 import withStyles from "@material-ui/core/styles/withStyles";
 import Button from "../../components/CustomButtons/Button.jsx";
@@ -20,6 +20,11 @@ import CardHeader from "../../components/Card/CardHeader.jsx";
 import CardFooter from "../../components/Card/CardFooter.jsx";
 
 import postCardStyle from "../../assets/jss/material-kit-react/views/postCard";
+import Fab from '@material-ui/core/Fab';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import classNames from "classnames";
+import { withRouter } from 'react-router-dom';
 
 
 export class PostCard extends Component {
@@ -50,6 +55,17 @@ export class PostCard extends Component {
         this.props.dispatch(handleVotePost(id, 'downVote'));
     }    
 
+    handleEdit(postId, postCategory) {
+        let { category } = this.props.match.params;
+        if( category.trim()!== "all") category = postCategory;
+        this.props.history.push(`/${category}/${postId}/edit`);
+    }
+
+    handleDelete(postId, category) {
+        this.props.dispatch(handleDeletePost(postId));
+        this.props.history.push(`/${category}`);
+    }    
+
   render() {
 
     const { post, classes } = this.props;
@@ -77,6 +93,14 @@ export class PostCard extends Component {
             </Badge>     
         </CardFooter>
         <CardFooter className={classes.cardFooter}>
+            <Fab color="secondary" aria-label="Edit" className={classNames(classes.fab)} onClick={() => { this.handleEdit(post.id, post.category) }}>
+                <EditIcon />
+            </Fab>
+            <Fab color="info" aria-label="Delete" className={classNames(classes.fab)} onClick={() => { this.handleDelete(post.id, post.category) }}>
+                <DeleteIcon />
+            </Fab> 
+        </CardFooter>
+        <CardFooter className={classes.cardFooter}>
 
         <p className={classes.divider}>             
             <Button color='primary' size="lg" component={Link} to={`/${post.category}/${post.id}`} >                    
@@ -87,45 +111,7 @@ export class PostCard extends Component {
     </Card>        
     )
 
-    // return (
-    //   <div>
-    //     <Card classsName={classes.card} >
-    //             <CardHeader 
-    //                 title={post.title}
-    //                 subheader={post.author}
-    //                 className={classes.cardHeader} />                       
-    //                 <CardContent>
-    //                     <Typography component="p" className={classes.typography}>
-    //                         {post.body}
-    //                     </Typography>
-    //                     <Chip label={post.category} 
-    //                           icon={<Category />} 
-    //                           color='secondary' />
-    //                 </CardContent>    
-    //                 <CardActions>
-    //                     <Avatar aria-label='SCORE' className={classes.avatar}>
-    //                         {post.voteScore}
-    //                     </Avatar>    
-    //                     <IconButton aria-label='Vote UP' onClick={()=>this.handleVoteUp(post.id)}>
-    //                         <ThumbUp />
-    //                     </IconButton>
-    //                     <IconButton aria-label='Vote DOWN' onClick={()=>this.handleVoteDown(post.id)}>
-    //                         <ThumbDown />
-    //                     </IconButton>
-    //                     <Badge badgeContent={post.commentCount} color="primary">
-    //                         <Message />
-    //                     </Badge>      
-    //                     <Button variant='contained' 
-    //                             color='primary' 
-    //                             className={classes.button}
-    //                             component={Link} to={`/${post.category}/${post.id}`} >                    
-    //                         View
-    //                     </Button>
-    //                 </CardActions>                    
-    //             </Card>         
-    //   </div>
-    // )
   }
 }
 
-export default connect()(withStyles(postCardStyle)(PostCard));
+export default withRouter(connect()(withStyles(postCardStyle)(PostCard)));
