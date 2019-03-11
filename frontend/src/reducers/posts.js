@@ -14,14 +14,6 @@ export default function posts( state={}, action){
             const indexPostsFilterDelete = Object.keys(state).filter(id => state[id].id !== action.id);
             let postsFilteredDelete = {};
 
-            console.log('========== REDUCER ==========')
-            console.log('before:');
-            console.log(state);
-            console.log('action.id:');
-            console.log(action.id);            
-            console.log('indexPostsFilterDelete:');
-            console.log(indexPostsFilterDelete);
-
             indexPostsFilterDelete.map( (index)=>{
                 return postsFilteredDelete = {
                     ...postsFilteredDelete,
@@ -30,10 +22,8 @@ export default function posts( state={}, action){
                     }
                 }
             });
-            
-            console.log('after:');
-            console.log(postsFilteredDelete);
-            
+           
+          
             return postsFilteredDelete;              
 
        

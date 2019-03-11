@@ -8,14 +8,6 @@ export default function comments( state={}, action){
         const indexCommentsFilterDelete = Object.keys(state).filter(id => state[id].id !== action.id);
         let CommentsFilteredDelete = {};
 
-        console.log('========== REDUCER ==========')
-        console.log('before:');
-        console.log(state);
-        console.log('action.id:');
-        console.log(action.id);            
-        console.log('indexCommentsFilterDelete:');
-        console.log(indexCommentsFilterDelete);
-
         indexCommentsFilterDelete.map( (index)=>{
             return CommentsFilteredDelete = {
                 ...CommentsFilteredDelete,
@@ -25,7 +17,6 @@ export default function comments( state={}, action){
             }
         });
         
-        console.log('after:');
         console.log(CommentsFilteredDelete);
         
         return CommentsFilteredDelete;        

@@ -60,7 +60,7 @@ export class PostCard extends Component {
           <h4>{post.title} <Chip label={post.author}  icon={<Face />}  /><Chip label={post.category}  icon={<Category />}  color="secondary" /></h4>                     
         </CardHeader>                
         <CardBody>
-                {post.body}
+                {`${post.body.substring(0,40)}... `}
         </CardBody>
         <CardFooter className={classes.cardFooter}>
             <Avatar aria-label='SCORE' >
